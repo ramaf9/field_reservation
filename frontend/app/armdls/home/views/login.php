@@ -15,15 +15,15 @@
       </div>
       <div class="row">
         <div class="col-lg-12">
-          <form method="POST" action="home/login">
+          <form method="POST" action="admin">
             <fieldset class="text-center">
-       <?php   
+       <?php
        if(isset($message_error) && $message_error){
           echo '<div class="alert alert-error">';
             echo '<a class="close" data-dismiss="alert">×</a>';
             echo '<strong>Oh snap!</strong> Change a few things up and try submitting again.';
-         
-          echo '</div>'; 
+
+          echo '</div>';
 
       }?>
               <legend>Login to your account</legend>

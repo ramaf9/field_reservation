@@ -15,7 +15,7 @@ public function data_get($id_param = NULL){
 	// retrieve data 'email' from get method
 	$id = $this->input->get('email');
 	// check $id value
-	if($id===NULL){
+	if($id === NULL){
 		// set $id with id in parameter
 		$id = $id_param;
 	}
@@ -81,11 +81,12 @@ public function data_post(){
 		// set response header http_created
 		$this->set_response($message, REST_Controller::HTTP_CREATED);
 	}
-	else{
+	else
+	{
 		// set message as failed
 		$message = [
 			'status' => FALSE,
-			'message' => $data['u_email'].' already exist'
+			'message' => $input['email'].' already exist'
 		];
 		// set response header http_ok
 		$this->set_response($message, REST_Controller::HTTP_OK);
@@ -96,8 +97,8 @@ public function data_post(){
 }
 // Server's Put/update user
 public function data_put(){
-	$data = $this->input->input_stream();
-	$this->User_model->update($data);
+	$input = $this->input->input_stream('input');
+	$this->User_model->update($input);
 	$message = [
 		'status' => TRUE,
 		'message' => $data['u_name'].' updated'
@@ -107,14 +108,15 @@ public function data_put(){
 // Server's Delete user
 public function data_delete(){
 	// retrieve data from segment 3 (/)
-	$id = $this->uri->segment(3);
+	$id = $this->input->get('input');
+	$id = $id['u_email'];
 	// if $id is null
 	if($id===NULL){
 		// set failed response header
 		$this->set_response([
 			'status' => FALSE,
-			'error' => 'ID cannot be empty'
-		], REST_Controller::HTTP_NOT_FOUND);
+			'error' => 'Email cannot be empty'
+		], REST_Controller::HTTP_OK);
 	}
 	// call delete from user_model
 	$data = $this->User_model->delete($id);
@@ -122,7 +124,10 @@ public function data_delete(){
 	if ($data)
 	{
 		// set success response header
-		$this->set_response($data, REST_Controller::HTTP_OK);
+		$this->set_response([
+			'status' => TRUE,
+			'message' => 'Data Deleted'
+		], REST_Controller::HTTP_NOT_FOUND);
 	}
 	else
 	{
@@ -135,34 +140,159 @@ public function data_delete(){
 }
 // Login with post method
 public function login_post(){
-	// retrieve data from post
-	$username = $this->input->post('username');
-	$password = $this->input->post('password');
-	$message = [];
+	$input = $this->input->post('input');
+
+	$data = array(
+		'u_email' => $input['u_email'],
+		'u_password' => $input['u_password']
+	);
 
 	// check if either $username or $password is null
-	if ($username===NULL || $password===NULL ) {
-		# code...
+	if ($input['u_email']===NULL || $input['u_password']===NULL ) {
+
+		$this->set_response([
+			'status' => FALSE,
+			'error' => 'username or password cannot be empty'
+		], REST_Controller::HTTP_NOT_FOUND);
 	}
 	// call check_password from user_model
-	$data = $this->User_model->check_password($username,$password);
+	$data = $this->User_model->check_password($input);
 	// if return true
 	if ($data) {
 		// set message as true
 		$message = [
 			'status' => TRUE,
 			'message' => 'Login success'
-		]
+		];
 	}
 	else{
 		// set message as failed
 		$message = [
 			'status' => FALSE,
 			'message' => 'Login failed'
-		]
+		];
 	}
 	// set response header
 	$this->set_response($message, REST_Controller::HTTP_OK);
 
 }
+
+public function forgot_password_get(){
+	$email = $this->input->get('email');
+	$verif_code = $this->input->get('verif');
+	if($verif_code == NULL) {
+		 $this->sendEmail();
+		$message = [
+			'status' => TRUE,
+			'message' => 'Check your email to reset password'
+		];
+		$this->set_response($message, REST_Controller::HTTP_UNAUTHORIZED);
+	}
+	else {
+		if($verif_code === '') {
+			$data['u_password'] = "RANDOMSTRING";
+			$this->User_model->update($data);
+			$message = [
+				'status' => TRUE,
+				'message' => 'Password changed to'.$data['u_password']
+			];
+			$this->sendEmail($email,$subject,$message['message']);
+			$this->set_response($message, REST_Controller::HTTP_OK);
+
+		}
+		else {
+			$message = [
+				'status' => FALSE,
+				'message' => 'Verif code false'
+			];
+			$this->set_response($message, REST_Controller::HTTP_OK);
+		}
+	}
+}
+
+	public function sendEmail_post($to,$subject,$message) {
+
+		$config = array(
+	    'protocol' => 'smtp',
+	    'smtp_host' => 'smtp.gmail.com',
+	    'smtp_port' => '587',
+	    'smtp_user' => 'aldendelfian@gmail.com',
+	    'smtp_pass' => 'xxxxxxxxx',
+	    'mailtype'  => 'html',
+	    'charset'   => 'iso-8859-1'
+		);
+		$this->load->library('email', $config);
+		$this->email->set_newline("\r\n");
+
+		$this->email->from('aldendelfian@gmail.com', 'alden');
+		$this->email->to($to);
+
+		$this->email->subject($subject);
+		$this->email->message($message);
+
+		if ($this->email->send()) {
+			$message = [
+				'status' => TRUE,
+				'message' => 'Email Sucseffully Send'
+			];
+			$this->set_response($message, REST_Controller::HTTP_OK);
+		} else {
+			$message = [
+				'status' => FALSE,
+				'message' => 'Email Not Send'
+			];
+			$this->set_response($message, REST_Controller::HTTP_OK);
+		}
+	}
+
+	public function sendEmailAll_post($subject,$message) {
+
+		$config = array(
+	    'protocol' => 'smtp',
+	    'smtp_host' => 'smtp.gmail.com',
+	    'smtp_port' => '587',
+	    'smtp_user' => 'aldendelfian@gmail.com',
+	    'smtp_pass' => 'xxxxxxxxx',
+	    'mailtype'  => 'html',
+	    'charset'   => 'iso-8859-1'
+		);
+		$this->load->library('email', $config);
+		$this->email->set_newline("\r\n");
+
+		$this->email->from('aldendelfian@gmail.com', 'alden');
+		$to = $this->input->get('input');
+		$data = $this->User_model->check_email($to);
+		if ($data) {
+			$this->email->to($to);
+			$message = [
+				'status' => TRUE,
+				'message' => 'Get All Email'
+			];
+			$this->set_response($message, REST_Controller::HTTP_OK);
+		} else {
+			$message = [
+				'status' => FALSE,
+				'message' => 'Email Not Found'
+			];
+			$this->set_response($message, REST_Controller::HTTP_OK);
+		}
+
+		$this->email->subject($subject);
+		$this->email->message($message);
+
+		if ($this->email->send()) {
+			$message = [
+				'status' => TRUE,
+				'message' => 'Email Sucseffully Send'
+			];
+			$this->set_response($message, REST_Controller::HTTP_OK);
+		} else {
+			$message = [
+				'status' => FALSE,
+				'message' => 'Email Not Send'
+			];
+			$this->set_response($message, REST_Controller::HTTP_OK);
+		}
+	}
+
 }
