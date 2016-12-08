@@ -19,7 +19,6 @@
 					</ul>
 				</div>
 				<h4 class="page-title">Field Reservation</h4>
-
 				<ol class="breadcrumb">
 					<li>
 						<a href="">Reservasi lapangan</a>
@@ -63,6 +62,7 @@
 								<?php
 									foreach ($schedule as $key) {
 										// echo json_encode($key);
+
 										echo '<tr>';
 										echo '<td>'.$key['f_location'].'</td>';
 										echo '<td>'.$key['f_name'].'</td><td>';
@@ -90,11 +90,13 @@
 												'.$av['start_time'].'</a>';
 											}
 
+											echo '<button button type="button" data-toggle="modal"
+											data-target="#ava-field" class="btn btn-warning dropdown-toggle waves-effect waves-light">
+											'.$av['start_time'].'</button>';
 											$count = $count +1;
 											if ($count%4 == 0) {
 												echo '<br />';
 											}
-
 										}
 										echo '</td></tr>';
 									}

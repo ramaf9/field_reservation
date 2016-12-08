@@ -11,6 +11,7 @@ class Admin extends CI_Controller {
     	$this->load->model('home_models');
 			$this->load->helper('cookie');
 
+
 					$config = array('server'            => REST_URL,
 					                //'api_key'         => 'Setec_Astronomy'
 					                //'api_name'        => 'X-API-KEY'
@@ -58,6 +59,10 @@ class Admin extends CI_Controller {
 
 			$date = date("Y-m-d", strtotime($date));
 			$data['date'] = $date;
+		if($this->input->server('REQUEST_METHOD')=='GET'){
+			$data = [];
+			$date = $this->input->get('date');
+			$date = date("Y-m-d", strtotime($date));
 			if (!empty($date)) {
 				$this->rest->format('application/json');
 				$result = $this->rest->get('transaction/available?input[t_date]='.$date);
