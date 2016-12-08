@@ -59,11 +59,8 @@ class Admin extends CI_Controller {
 
 			$date = date("Y-m-d", strtotime($date));
 			$data['date'] = $date;
-		if($this->input->server('REQUEST_METHOD')=='GET'){
-			$data = [];
-			$date = $this->input->get('date');
-			$date = date("Y-m-d", strtotime($date));
-			if (!empty($date)) {
+
+				if (!empty($date)) {
 				$this->rest->format('application/json');
 				$result = $this->rest->get('transaction/available?input[t_date]='.$date);
 				$data['schedule'] = json_decode(json_encode($result), true);

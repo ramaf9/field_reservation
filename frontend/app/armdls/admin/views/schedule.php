@@ -90,9 +90,6 @@
 												'.$av['start_time'].'</a>';
 											}
 
-											echo '<button button type="button" data-toggle="modal"
-											data-target="#ava-field" class="btn btn-warning dropdown-toggle waves-effect waves-light">
-											'.$av['start_time'].'</button>';
 											$count = $count +1;
 											if ($count%4 == 0) {
 												echo '<br />';
