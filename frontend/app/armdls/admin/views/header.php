@@ -17,12 +17,25 @@
 		<link href="<?php echo base_url(''); ?>assets/css/icons.css" rel="stylesheet" type="text/css" />
 		<link href="<?php echo base_url(''); ?>assets/css/pages.css" rel="stylesheet" type="text/css" />
 		<link href="<?php echo base_url(''); ?>assets/css/responsive.css" rel="stylesheet" type="text/css" />
-    <link href="<?php echo base_url(''); ?>assets/plugins/custombox/css/custombox.css" rel="stylesheet">
-    <link href="<?php echo base_url(''); ?>assets/plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
+	    <link href="<?php echo base_url(''); ?>assets/plugins/custombox/css/custombox.css" rel="stylesheet">
+	    <link href="<?php echo base_url(''); ?>assets/plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
 		<link href="<?php echo base_url(''); ?>assets/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css" rel="stylesheet">
 		<link href="<?php echo base_url(''); ?>assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
 		<link href="<?php echo base_url(''); ?>assets/plugins/clockpicker/css/bootstrap-clockpicker.min.css" rel="stylesheet">
 		<link href="<?php echo base_url(''); ?>assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+        <link href="<?php echo base_url(''); ?>assets/plugins/tablesaw/css/tablesaw.css" rel="stylesheet" type="text/css" />
+		<!-- DataTables -->
+	    <link href="<?php echo base_url(''); ?>assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
+	    <link href="<?php echo base_url(''); ?>assets/plugins/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	    <link href="<?php echo base_url(''); ?>assets/plugins/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	    <link href="<?php echo base_url(''); ?>assets/plugins/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	    <link href="<?php echo base_url(''); ?>assets/plugins/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	    <link href="<?php echo base_url(''); ?>assets/plugins/datatables/dataTables.colVis.css" rel="stylesheet" type="text/css"/>
+	    <link href="<?php echo base_url(''); ?>assets/plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	    <link href="<?php echo base_url(''); ?>assets/plugins/datatables/fixedColumns.dataTables.min.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="<?php echo base_url(''); ?>assets/plugins/magnific-popup/css/magnific-popup.css" />
+        <link rel="stylesheet" href="<?php echo base_url(''); ?>assets/plugins/jquery-datatables-editable/datatables.css" />
+
 		<!-- HTML5 Shiv and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 		<!--[if lt IE 9]>
@@ -197,16 +210,16 @@
 							<a href="<?php echo base_url(''); ?>admin/landing" class="waves-effect"><i class="ti-home"></i> <span> Dashboard </span></a>
 						</li>
 						<li class="has_sub">
-							<a href="<?php echo base_url(''); ?>" class="waves-effect"><i class="ti-menu-alt"></i><span> Reservation List   </span></a>
+							<a href="<?php echo base_url(''); ?>" class="waves-effect"><i class="ti-shopping-cart"></i><span class="label label-warning pull-right">6</span><span> Cart </span></a>
+						</li>
+						<li class="has_sub">
+							<a href="<?php echo base_url(''); ?>admin/paymentlist" class="waves-effect"><i class="ti-menu-alt"></i><span> Reservation List   </span></a>
 						</li>
 						<li class="has_sub">
 							<a href="<?php echo base_url(''); ?>" class="waves-effect"><i class="ti-bar-chart"></i><span class="label label-pink pull-right">11</span><span> Charts </span></a>
 						</li>
 						<li class="has_sub">
 							<a href="<?php echo base_url(''); ?>" class="waves-effect"><i class="ti-gift"></i><span> Extras </span></a>
-						</li>
-						<li class="has_sub">
-							<a href="<?php echo base_url(''); ?>" class="waves-effect"><i class="ti-shopping-cart"></i><span class="label label-warning pull-right">6</span><span> eCommerce </span></a>
 						</li>
 					</ul>
 					<div class="clearfix"></div>

@@ -153,7 +153,7 @@
 											</div>
 										</div>
 									</div>
-								<!-- </section>
+								</section>
 								<h3>Step 3</h3>
 								<section>
 									<div class="row">
@@ -201,7 +201,7 @@
 											<label for="acceptTerms-2">I agree with the Terms and Conditions.</label>
 										</div>
 									</div>
-								</section> -->
+								</section>
 							</div>
 						</form>
 					</div>
