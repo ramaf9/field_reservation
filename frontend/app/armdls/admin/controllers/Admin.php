@@ -9,6 +9,8 @@ class Admin extends CI_Controller {
 
 		$this->load->library('session');
     	$this->load->model('home_models');
+			$this->load->helper('cookie');
+
 
 					$config = array('server'            => REST_URL,
 					                //'api_key'         => 'Setec_Astronomy'
@@ -35,11 +37,36 @@ class Admin extends CI_Controller {
 	}
 
 	public function landing(){
+		$this->load->library('cart');
 		if($this->input->server('REQUEST_METHOD')=='GET'){
-			$data = [];
-			$date = $this->input->get('date');
+				$time = $this->input->get('time');
+				$id = $this->input->get('id');
+				$date = $this->input->get('date');
+			if (!empty($id) && !empty($time)) {
+				$book = [];
+				if ($this->session->has_userdata('booked')) {
+					$book = $this->session->booked;
+					$data['book'] = $book;
+				}
+				$array = [
+					'id' => $id,
+					'date' => $date,
+					'time' => $time
+				];
+				if (!in_array($array, $book)) {
+
+					array_push($book,$array);
+				}
+				$data['book'] = $book;
+				$this->session->set_userdata('booked',$data['book']);
+				// $this->session->sess_destroy();
+			}
+
+
 			$date = date("Y-m-d", strtotime($date));
-			if (!empty($date)) {
+			$data['date'] = $date;
+
+				if (!empty($date)) {
 				$this->rest->format('application/json');
 				$result = $this->rest->get('transaction/available?input[t_date]='.$date);
 				$data['schedule'] = json_decode(json_encode($result), true);

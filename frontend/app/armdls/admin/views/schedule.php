@@ -61,27 +61,50 @@
 							<tbody>
 								<?php
 									foreach ($schedule as $key) {
+										// echo json_encode($key);
+
 										echo '<tr>';
 										echo '<td>'.$key['f_location'].'</td>';
 										echo '<td>'.$key['f_name'].'</td><td>';
 										$count = 0;
 										foreach($key['available_time'] as $av){
+											$booked = false;
+											// echo json_encode($book);
+											if (isset($book)) {
 
-											echo '<button button type="button" data-toggle="modal"
-											data-target="#ava-field" class="btn btn-warning dropdown-toggle waves-effect waves-light">
-											'.$av['start_time'].'</button>';
+												foreach ($book as $row ) {
+													if ($row['date'] == $date && $row['id'] == $key['f_id'] && $row['time'] == $av['start_time']) {
+														$booked = true;
+														break;
+													}
+												}
+											}
+											if (!$booked) {
+												echo '<a href="'.base_url().'admin/landing?date='.$date.'&time='.$av['start_time'].'&id='.$key['f_id'].'"
+												data-target="#ava-field" class="btn btn-primary dropdown-toggle waves-effect waves-light">
+												'.$av['start_time'].'</a>';
+											}
+											else{
+												echo '<a href="#"
+												data-target="#ava-field" class="disabled btn btn-warning dropdown-toggle waves-effect waves-light" disabled>
+												'.$av['start_time'].'</a>';
+											}
+
 											$count = $count +1;
 											if ($count%4 == 0) {
 												echo '<br />';
 											}
-
-
 										}
 										echo '</td></tr>';
 									}
 								?>
 							</tbody>
 						</table>
+						<script type="text/javascript">
+						$('.disabled').click(function(e){
+							e.preventDefault();
+						})
+						</script>
 						<!-- <table class="table table-striped" id="datatable-editable">
 							<thead>
 								<tr>

@@ -1,11 +1,8 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.2
+-- version 4.5.1
 -- http://www.phpmyadmin.net
---
--- Host: localhost
--- Generation Time: Dec 08, 2016 at 06:59 AM
 -- Server version: 10.1.13-MariaDB
--- PHP Version: 5.5.37
+-- PHP Version: 7.0.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -51,6 +48,9 @@ INSERT INTO `customer` (`c_email`, `c_name`, `c_password`, `c_tlp`, `c_status`, 
 --
 
 CREATE TABLE `field` (
+  `f_id` varchar(255) NOT NULL,
+  `f_name` varchar(255) NOT NULL,
+  `f_location` varchar(255) NOT NULL
   `f_id` int(255) NOT NULL,
   `f_name` varchar(255) NOT NULL,
   `f_location` enum('UNTAG','MANGGA_DUA','','') NOT NULL
@@ -108,6 +108,9 @@ CREATE TABLE `news` (
 --
 
 CREATE TABLE `price` (
+<<<<<<< HEAD
+  `p_start_booking` datetime NOT NULL,
+  `p_end_booking` datetime NOT NULL,
   `p_start_booking` time NOT NULL,
   `p_end_booking` time NOT NULL,
   `p_price` int(11) NOT NULL,
@@ -135,6 +138,13 @@ CREATE TABLE `transaction` (
   `t_status` varchar(255) NOT NULL,
   `t_current_payment` varchar(255) NOT NULL,
   `t_date_payment` datetime NOT NULL,
+  `t_field` int(11) NOT NULL,
+  `t_price` int(11) NOT NULL,
+  `t_start_booking` datetime NOT NULL,
+  `t_end_booking` datetime NOT NULL,
+  `t_time_length` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
   `t_invoice` int(10) NOT NULL,
   `t_field` int(11) NOT NULL,
   `t_price` int(11) NOT NULL,
@@ -230,6 +240,10 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `transaction`
+--
+ALTER TABLE `transaction`
+  MODIFY `t_id` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `field`
 --
 ALTER TABLE `field`
