@@ -113,11 +113,12 @@
                                     <tbody>
                                         <?php
                                             $count = 1;
+                                            // echo json_encode($extend);
                                             foreach ($extend as $key) {
                                                 echo '<tr class="gradeX">';
                                                 echo '<td>'.$count.'</td>';
-                                                echo '<td>'.$key['item'].'</td>';
-                                                echo '<td style="text-align:right;">IDR '.number_format( $key['price'] , 2 , ',' , '.' ).'</td>';
+                                                echo '<td>'.$key['l_name'].'</td>';
+                                                echo '<td style="text-align:right;">IDR '.number_format( $key['l_price'] , 2 , ',' , '.' ).'</td>';
                                                 echo '</td>';
                                                 $count = $count +1;
                                             }
@@ -195,7 +196,6 @@
     </footer>
 
 </div>
-<!-- Modal -->
 
 <!-- ============================================================== -->
 <!-- End Right content here -->

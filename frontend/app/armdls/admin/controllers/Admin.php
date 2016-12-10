@@ -352,21 +352,31 @@ class Admin extends CI_Controller {
 			if (!empty($i_id)) {
 				$invoice = $this->rest->get('transaction/invoice?filter[i_id]='.$i_id);
 				$transactions = $this->rest->get('transaction/data?input[t_invoice]='.$i_id);
-				$lease = $this->rest->get('lease/data');
+				$lease = $this->rest->get('lease/data/'.$i_id);
 				$data['transactions'] = json_decode(json_encode($transactions), true);
+				$lease = json_decode(json_encode($lease), true);
 				$data['invoice'] = json_decode(json_encode($invoice[0]), true);
 				$data['temp_payment'] = $data['invoice']['i_total_payment'];
+				if (isset($lease['status']) && !$lease['status']) {
+
+				}
+				else{
+					$this->session->set_userdata('invoice_'.$i_id.'',$lease);
+				}
+				// echo json_encode($lease);
 
 				if ($this->session->has_userdata('invoice_'.$i_id.'') && $data['invoice']['i_status']=="paid") {
 					$data['extend'] = $this->session->userdata('invoice_'.$i_id.'');
+					// echo json_encode($data['extend']);
 					if (!empty($extend)) {
 						array_push($data['extend'],$extend);
 						$this->session->set_userdata('invoice_'.$i_id.'',$data['extend']);
-						redirect(base_url().'admin/invoice?id='.$i_id);
+						// echo json_encode($data['extend']);
+						// redirect(base_url().'admin/invoice?id='.$i_id);
 					}
 
 					foreach ($data['extend'] as $key ) {
-						$data['temp_payment'] = $data['temp_payment'] + $key['price'];
+						$data['temp_payment'] = $data['temp_payment'] + $key['l_price'];
 					}
 
 

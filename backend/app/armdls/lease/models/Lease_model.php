@@ -10,7 +10,7 @@ class Lease_model extends CI_Model{
   	else{
   		$replace = "='".$id."'";
   	}
-  	$query = $this->db->query("select * from lease where l_id".$replace);
+  	$query = $this->db->query("select * from lease where l_invoice".$replace);
   	return $query->result_array();
   }
 
