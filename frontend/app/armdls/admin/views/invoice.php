@@ -166,7 +166,6 @@
                                     }else if($invoice['i_status'] == "paid"){
                                         echo '<button type="submit" class="btn btn-danger waves-effect waves-light" name="i_status" value="completed">Change to complete</a>';
                                     } ?>
-
                                     </form>
                                 </div>
                             </div>
