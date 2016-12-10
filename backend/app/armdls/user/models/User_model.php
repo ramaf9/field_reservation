@@ -97,7 +97,7 @@ public function check_password($data){
 		return FALSE;
 	}
 	else{
-		return TRUE;
+		return $query->result_array();
 	}
 }
 }
