@@ -42,56 +42,27 @@
 		                    <th>Detail</th>
 		                </tr>
 		                </thead>
-
 		                <tbody>
-							<?php
-							// echo json_encode($invoice);
-							foreach ($invoice as $key) {
-								echo "<tr><td>
-								".$key['i_id']."
-								</td>";
-								echo "<td>
-								".$key['i_nama_pemesan']."
-								</td>";
-								echo "<td>
-								".$key['i_telp_pemesan']."
-								</td>";
-								echo "<td>
-								".$key['i_date']."
-								</td>";
-								echo "<td>
-								<a href='".base_url()."admin/invoice?id=".$key['i_id']."' class='btn btn-default waves-effect waves-light'>".$key['i_status']."</a>
-								</td></tr>";
-							}
-							?>
-		                <!-- <tr>
-		                    <td><a href="#">00001</a></td>
-		                    <td>System Architect</td>
-		                    <td>0812-3556-0999</td>
-		                    <td>2011/04/25</td>
-		                    <td><button class="btn btn-default waves-effect waves-light">Paid</button></td>
-		                </tr>
-						<tr>
-		                    <td><a href="#">00002</a></td>
-		                    <td>System Architect</td>
-		                    <td>0812-3556-0999</td>
-		                    <td>2011/04/25</td>
-		                    <td><button class="btn btn-warning waves-effect waves-light">Sudah DP</button></td>
-		                </tr>
-						<tr>
-		                    <td><a href="#">00003</a></td>
-		                    <td>System Architect</td>
-		                    <td>0812-3556-0999</td>
-		                    <td>2011/04/25</td>
-		                    <td><button class="btn btn-danger waves-effect waves-light">Booked</button></td>
-		                </tr>
-						<tr>
-		                    <td><a href="#">00004</a></td>
-		                    <td>System Architect</td>
-		                    <td>0812-3556-0999</td>
-		                    <td>2011/04/25</td>
-		                    <td><button class="btn btn-default waves-effect waves-light">Paid</button></td>
-		                </tr> -->
+										<?php
+										// echo json_encode($invoice);
+										foreach ($invoice as $key) {
+											echo "<tr><td>
+											".$key['i_id']."
+											</td>";
+											echo "<td>
+											".$key['i_nama_pemesan']."
+											</td>";
+											echo "<td>
+											".$key['i_telp_pemesan']."
+											</td>";
+											echo "<td>
+											".$key['i_date']."
+											</td>";
+											echo "<td>
+											<a href='".base_url()."admin/invoice?id=".$key['i_id']."' class='btn btn-default waves-effect waves-light'>".$key['i_status']."</a>
+											</td></tr>";
+										}
+										?>
 		                </tbody>
 		            </table>
 		        </div>

@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
 		<meta name="author" content="Coderthemes">
-		<link rel="shortcut icon" href="assets/images/favicon_1.ico">
+		<link rel="shortcut icon" href="<?php echo base_url(''); ?>assets/images/favicon_1.ico">
 		<title>GOOL - Futsal reservation</title>
 		<!--Morris Chart CSS -->
 		<link rel="stylesheet" href="<?php echo base_url(''); ?>assets/plugins/morris/morris.css">
@@ -17,25 +17,24 @@
 		<link href="<?php echo base_url(''); ?>assets/css/icons.css" rel="stylesheet" type="text/css" />
 		<link href="<?php echo base_url(''); ?>assets/css/pages.css" rel="stylesheet" type="text/css" />
 		<link href="<?php echo base_url(''); ?>assets/css/responsive.css" rel="stylesheet" type="text/css" />
-	    <link href="<?php echo base_url(''); ?>assets/plugins/custombox/css/custombox.css" rel="stylesheet">
-	    <link href="<?php echo base_url(''); ?>assets/plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
+		<link href="<?php echo base_url(''); ?>assets/plugins/custombox/css/custombox.css" rel="stylesheet">
+		<link href="<?php echo base_url(''); ?>assets/plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
 		<link href="<?php echo base_url(''); ?>assets/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css" rel="stylesheet">
 		<link href="<?php echo base_url(''); ?>assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
 		<link href="<?php echo base_url(''); ?>assets/plugins/clockpicker/css/bootstrap-clockpicker.min.css" rel="stylesheet">
 		<link href="<?php echo base_url(''); ?>assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-        <link href="<?php echo base_url(''); ?>assets/plugins/tablesaw/css/tablesaw.css" rel="stylesheet" type="text/css" />
+		<link href="<?php echo base_url(''); ?>assets/plugins/tablesaw/css/tablesaw.css" rel="stylesheet" type="text/css" />
 		<!-- DataTables -->
-	    <link href="<?php echo base_url(''); ?>assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
-	    <link href="<?php echo base_url(''); ?>assets/plugins/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css"/>
-	    <link href="<?php echo base_url(''); ?>assets/plugins/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css"/>
-	    <link href="<?php echo base_url(''); ?>assets/plugins/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css"/>
-	    <link href="<?php echo base_url(''); ?>assets/plugins/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css"/>
-	    <link href="<?php echo base_url(''); ?>assets/plugins/datatables/dataTables.colVis.css" rel="stylesheet" type="text/css"/>
-	    <link href="<?php echo base_url(''); ?>assets/plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css"/>
-	    <link href="<?php echo base_url(''); ?>assets/plugins/datatables/fixedColumns.dataTables.min.css" rel="stylesheet" type="text/css"/>
-        <link rel="stylesheet" href="<?php echo base_url(''); ?>assets/plugins/magnific-popup/css/magnific-popup.css" />
-        <link rel="stylesheet" href="<?php echo base_url(''); ?>assets/plugins/jquery-datatables-editable/datatables.css" />
-
+		<link href="<?php echo base_url(''); ?>assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
+		<link href="<?php echo base_url(''); ?>assets/plugins/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+		<link href="<?php echo base_url(''); ?>assets/plugins/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+		<link href="<?php echo base_url(''); ?>assets/plugins/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+		<link href="<?php echo base_url(''); ?>assets/plugins/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+		<link href="<?php echo base_url(''); ?>assets/plugins/datatables/dataTables.colVis.css" rel="stylesheet" type="text/css"/>
+		<link href="<?php echo base_url(''); ?>assets/plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+		<link href="<?php echo base_url(''); ?>assets/plugins/datatables/fixedColumns.dataTables.min.css" rel="stylesheet" type="text/css"/>
+		<link rel="stylesheet" href="<?php echo base_url(''); ?>assets/plugins/magnific-popup/css/magnific-popup.css" />
+		<link rel="stylesheet" href="<?php echo base_url(''); ?>assets/plugins/jquery-datatables-editable/datatables.css" />
 		<!-- HTML5 Shiv and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 		<!--[if lt IE 9]>
@@ -214,12 +213,6 @@
 						</li>
 						<li class="has_sub">
 							<a href="<?php echo base_url(''); ?>admin/paymentlist" class="waves-effect"><i class="ti-menu-alt"></i><span> Reservation List   </span></a>
-						</li>
-						<li class="has_sub">
-							<a href="<?php echo base_url(''); ?>" class="waves-effect"><i class="ti-bar-chart"></i><span class="label label-pink pull-right">11</span><span> Charts </span></a>
-						</li>
-						<li class="has_sub">
-							<a href="<?php echo base_url(''); ?>" class="waves-effect"><i class="ti-gift"></i><span> Extras </span></a>
 						</li>
 					</ul>
 					<div class="clearfix"></div>

@@ -8,8 +8,8 @@ class Admin extends CI_Controller {
 		parent::__construct();
 
 		$this->load->library('session');
-    	$this->load->model('home_models');
-			$this->load->helper('cookie');
+    $this->load->model('home_models');
+		$this->load->helper('cookie');
 
 
 					$config = array('server'            => REST_URL,
@@ -64,6 +64,31 @@ class Admin extends CI_Controller {
 		$this->load->view('footer');
 	}
 
+	function sendEmail(){
+        $config['protocol']    = 'smtp';
+        $config['smtp_host']    = 'ssl://smtp.gmail.com';
+        $config['smtp_port']    = '465';
+        $config['smtp_timeout'] = '7';
+        $config['smtp_user']    = 'rysmawidjaja@gmail.com';
+        $config['smtp_pass']    = 'rysmaadityawidjaja19602';
+        $config['charset']    = 'utf-8';
+        $config['newline']    = "\r\n";
+        $config['mailtype'] = 'text'; // or html
+        $config['validation'] = TRUE; // bool whether to validate email or not
+
+        $this->email->initialize($config);
+
+        $this->email->from('rysmawidjaja@gmail.com', 'Rysma Aditya W');
+        $this->email->to('yeyrama@gmail.com');
+
+        $this->email->subject('Email Test');
+        $this->email->message('Tes ram');
+
+        $this->email->send();
+
+        echo $this->email->print_debugger();
+    }
+
 	public function landing(){
 		$this->load->library('cart');
 		if($this->input->server('REQUEST_METHOD')=='GET'){
@@ -112,7 +137,6 @@ class Admin extends CI_Controller {
 					];
 				}
 			}
-
 
 			$this->load->view('header',$data);
 			$this->load->view('schedule');
@@ -197,10 +221,6 @@ class Admin extends CI_Controller {
 			$data = $this->input->post(NULL,TRUE);
 			if (!empty($id)) {
 				$invoice = $this->rest->put('transaction/invoice/'.$id,$data,'');
-				// $transactions = $this->rest->get('transaction/data?input[t_invoice]='.$id);
-				// $data['transactions'] = json_decode(json_encode($transactions), true);
-				// $data['invoice'] = json_decode(json_encode($invoice[0]), true);
-				// echo json_encode($invoice);
 				redirect(base_url().'admin/invoice?id='.$id);
 			}
 			else{
