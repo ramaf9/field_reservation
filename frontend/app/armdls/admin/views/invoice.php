@@ -26,8 +26,8 @@
 
                                 </div>
                                 <div class="pull-right">
-                                    <h4>Invoice # <br>
-                                        <strong><?php echo $invoice['i_date'].' - '.$invoice['i_id'] ?></strong>
+                                    <h4>Invoice # <?php echo $invoice['i_id'] ?><br>
+                                        <strong><?php echo $invoice['i_date'] ?></strong>
                                     </h4>
                                 </div>
                             </div>
@@ -37,10 +37,9 @@
 
                                     <div class="pull-left m-t-30">
                                         <address>
-                                          <strong>Twitter, Inc.</strong><br>
-                                          795 Folsom Ave, Suite 600<br>
-                                          San Francisco, CA 94107<br>
-                                          <abbr title="Phone">P:</abbr> (123) 456-7890
+                                          <strong><?php echo $invoice['i_nama_pemesan'] ?></strong><br>
+                                          <?php echo $invoice['i_email_pemesan'] ?><br>
+                                          <abbr title="Phone">Phone:</abbr> <?php echo $invoice['i_telp_pemesan'] ?>
                                           </address>
                                     </div>
                                     <div class="pull-right m-t-30">
@@ -60,7 +59,6 @@
                                                 <th>Item</th>
                                                 <th>Time</th>
                                                 <th style='text-align:right;'>Unit cost</th>
-
                                             </tr></thead>
                                             <tbody>
                                                 <?php

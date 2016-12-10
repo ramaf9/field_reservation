@@ -39,6 +39,7 @@ class Superadmin extends CI_Controller {
 	}
 
 	public function index(){
+
 		if ($this->session->has_userdata('login')) {
 			redirect(base_url().'superadmin/landing');
 		}
@@ -61,6 +62,22 @@ class Superadmin extends CI_Controller {
 		}
 	}
 
+	public function showUser(){
+	}
+
+	public function addUser(){
+		if($this->input->server('REQUEST_METHOD')=='POST'){
+			$params['input'] = $this->input->post('input');
+			$result = $this->rest->post('user/data',$params);
+			echo json_encode($result);
+			redirect(base_url.'superadmin/landing');
+		}
+	}
+
+	public function addVoucher(){
+
+	}
+
 	public function logout(){
 		$this->session->unset_userdata('login');
 		$this->session->sess_destroy();
@@ -68,8 +85,12 @@ class Superadmin extends CI_Controller {
 	}
 
 	public function managerial(){
+		$user = $this->rest->get('user/data');
+		$data['user'] = json_decode(json_encode($user), TRUE);
+		echo json_encode($user);
+
 		$this->load->view('header');
-		$this->load->view('manage');
+		$this->load->view('manage', $data);
 		$this->load->view('footer');
 	}
 

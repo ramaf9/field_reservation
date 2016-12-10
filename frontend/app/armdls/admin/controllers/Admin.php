@@ -52,7 +52,6 @@ class Admin extends CI_Controller {
 			$params['input'] = $this->input->post('user');
 			$result = $this->rest->post('user/login',$params);
 			$data['user'] = json_decode(json_encode($result), true);
-			// echo json_encode($data['user']);
 			if ($data['user']['status']==TRUE) {
 				$this->session->set_userdata('login',$data['user']);
 				redirect(base_url().'admin/landing');
@@ -133,46 +132,6 @@ class Admin extends CI_Controller {
 			$this->load->view('footer');
 		}
 	}
-	// public function index(){
-	// 	if ($this->session->userdata('logged_in')) {
-	// 		$role = $this->session->userdata('role');
-	// 		$this->redirectUser($role);
-	// 	}
-	//
-	// 	else if($this->input->server('REQUEST_METHOD')=='GET'){
-	// 		$this->load->view('login');
-	// 	}
-	//
-	// 	else if($this->input->server('REQUEST_METHOD')=='POST'){
-	// 		$this->rest->format('application/json');
-	// 		$params['input'] = $this->input->post(NULL,TRUE);
-	// 		$user = $this->rest->post('user/login', $params,'');
-	// 		$user = json_decode(json_encode($user), true);
-	//
-	// 		if ($user['status']) {
-	// 		$role = $user['data']['role'];
-	// 		$this->session->set_userdata($user['data']);
-	// 		$this->redirectUser($role);
-	// 		}
-	//
-	// 		else{
-	// 		$message = "User/password salah";
-	// 		echo "<script type='text/javascript'>alert('$message');</script>";
-	// 		$this->load->view('login');
-	// 		}
-	// 	}
-	// }
-
-	// public function viewSchedule(){
-	// 	if($this->input->server('REQUEST_METHOD')=='GET'){
-	// 		$this->load->view('schedule');
-	// 	}else if($this->input->server('REQUEST_METHOD')=='POST'){
-	// 		$this->rest->format('application/json');
-	// 		$params['input'] = $this->input->post(NULL,TRUE);
-	// 		$user = $this->rest->get('transaction/available', $params,'');
-	// 		$user = json_decode(json_encode($user), true);
-	// 	}
-	// }
 
 	public function viewSchedule(){
 		$this->load->view('header');

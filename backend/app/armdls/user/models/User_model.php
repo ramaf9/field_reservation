@@ -8,10 +8,10 @@ public function read($id){
 		$data = "" ;
 	}
 	else{
-		$data = "=$id";
+		$data = " where u_email=$id";
 	}
 	// query get data from table user
-	$query = $this->db->query("select * from users where u_email".$data);
+	$query = $this->db->query("select * from users".$data);
 	// return query result as array
 	return $query->result_array();
 }
