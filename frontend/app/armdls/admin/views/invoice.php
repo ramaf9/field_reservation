@@ -124,11 +124,12 @@
                                     <tbody>
                                         <?php
                                             $count = 1;
+                                            // echo json_encode($extend);
                                             foreach ($extend as $key) {
                                                 echo '<tr class="gradeX">';
                                                 echo '<td>'.$count.'</td>';
-                                                echo '<td>'.$key['item'].'</td>';
-                                                echo '<td style="text-align:right;">IDR '.number_format( $key['price'] , 2 , ',' , '.' ).'</td>';
+                                                echo '<td>'.$key['l_name'].'</td>';
+                                                echo '<td style="text-align:right;">IDR '.number_format( $key['l_price'] , 2 , ',' , '.' ).'</td>';
                                                 echo '</td>';
                                                 $count = $count +1;
                                             }
@@ -242,11 +243,11 @@
               <div class="form-group">
                   <input type="hidden" name="id" value="<?php echo $invoice['i_id']; ?>">
                   <label for="usr">Item :</label>
-                  <input type="text" name="extend[item]" class="form-control" id="usr" required>
+                  <input type="text" name="extend[l_name]" class="form-control" id="usr" required>
                 </div>
                 <div class="form-group">
                   <label for="pwd">Price:</label>
-                  <input type="number" name="extend[price]" class="form-control" id="pwd" required>
+                  <input type="number" name="extend[l_price]" class="form-control" id="pwd" required>
                 </div>
 
 

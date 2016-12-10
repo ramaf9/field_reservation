@@ -48,7 +48,7 @@ class Lease extends REST_Controller{
   	if ($create) {
   		$data = array(
   			'l_name' => $input['name'],
-  			'l_qty' => $input['qty'],
+  	// 		'l_qty' => $input['qty'],
   			'l_price' => $input['price']
   		);
   		$this->Lease_model->insert($data);
@@ -78,7 +78,7 @@ class Lease extends REST_Controller{
   	$this->set_response($message, REST_Controller::HTTP_CREATED);
   }
 
-  ublic function data_delete(){
+  public function data_delete(){
   	$id = $this->input->get('input');
   	$id = $id['l_id'];
   	if($id===NULL){
