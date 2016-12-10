@@ -9,17 +9,6 @@
             <!-- Page-Title -->
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="btn-group pull-right m-t-15">
-                        <button type="button" class="hidden-print btn btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">Settings <span class="m-l-5"><i class="fa fa-cog"></i></span></button>
-                        <ul class="dropdown-menu drop-menu-right" role="menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                        </ul>
-                    </div>
-
                     <h4 class="page-title">Invoice</h4>
                     <ol class="breadcrumb">
                         <li><a href="#">Invoice Pembayaran</a></li>
@@ -164,13 +153,15 @@
                             </div>
 
                             <div class="row" style="border-radius: 0px;">
-                                <div class="col-md-3 col-md-offset-9">
+                              <div class="container">
+                                <div class="col-md-4 col-md-offset-8">
                                     <!-- <p class="text-right"><b>Sub-total:</b> 2930.00</p>
                                     <p class="text-right">Discout: 12.9%</p> -->
                                     <!-- <p class="text-right">VAT: 12.9%</p> -->
                                     <hr>
                                     <h3 class="text-right"><?php echo "IDR ".number_format( $temp_payment , 2 , ',' , '.' ); ?></h3>
                                 </div>
+                              </div>
                             </div>
                             <hr>
                             <div class="hidden-print">
@@ -198,66 +189,14 @@
 
     </div> <!-- content -->
 
-    <!-- MODAL -->
-    <div id="dialog" class="modal-block mfp-hide">
-        <section class="panel panel-info panel-color">
-            <header class="panel-heading">
-                <h2 class="panel-title">Are you sure?</h2>
-            </header>
-            <div class="panel-body">
-                <div class="modal-wrapper">
-                    <div class="modal-text">
-                        <p>Are you sure that you want to delete this row?</p>
-                    </div>
-                </div>
-
-                <div class="row m-t-20">
-                    <div class="col-md-12 text-right">
-                        <button id="dialogConfirm" class="btn btn-primary waves-effect waves-light">Confirm</button>
-                        <button id="dialogCancel" class="btn btn-default waves-effect">Cancel</button>
-                    </div>
-                </div>
-            </div>
-
-        </section>
-    </div>
-    <!-- end Modal -->
 
     <footer class="footer">
-        © 2016. All rights reserved.
+        © 2016. Gool Futsal All rights reserved.
     </footer>
 
 </div>
 <!-- Modal -->
-<div class="modal fade" id="modalExtend" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Tambahan biaya</h4>
-      </div>
-      <div class="modal-body">
-          <form class="" action="<?php echo base_url().'admin/invoice'?>" method="get">
-              <div class="form-group">
-                  <input type="hidden" name="id" value="<?php echo $invoice['i_id']; ?>">
-                  <label for="usr">Item :</label>
-                  <input type="text" name="extend[item]" class="form-control" id="usr" required>
-                </div>
-                <div class="form-group">
-                  <label for="pwd">Price:</label>
-                  <input type="number" name="extend[price]" class="form-control" id="pwd" required>
-                </div>
 
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save changes</button>
-            </form>
-      </div>
-    </div>
-  </div>
-</div>
 <!-- ============================================================== -->
 <!-- End Right content here -->
 <!-- ============================================================== -->
