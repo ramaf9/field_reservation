@@ -79,7 +79,7 @@ class Transaction extends REST_Controller {
   public function price_get(){
       $date = $this->input->get('date');
       $price = $this->Transaction_model->get_price($date);
-      $this->set_response($price[0], REST_Controller::HTTP_OK);
+      $this->set_response($price, REST_Controller::HTTP_OK);
   }
 
   public function invoice_get(){

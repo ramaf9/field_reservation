@@ -87,17 +87,23 @@
                                 </div>
                             </div>
 
-                            <?php if (isset($extend) && $invoice['i_status'] == "paid"){ ?>
+                            <?php if (isset($extend) && $invoice['i_status'] != "booked"){ ?>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="m-b-30">
+                                        <?php
+                                        if ($invoice['i_status'] != "completed") {
+                                            ?>
+                                            <button type="button" class="btn btn-default waves-effect waves-light" data-toggle="modal" data-target="#modalExtend">
+                                              Tambahan biaya +
+                                            </button>
+                                            <a href="<?php echo base_url().'admin/invoice?action=removeExtend&id='.$invoice['i_id']; ?>" type="button" class="btn btn-danger waves-effect waves-light">
+                                              Hapus
+                                          </a>
+                                            <?php
+                                        }
+                                        ?>
 
-                                        <button type="button" class="btn btn-default waves-effect waves-light" data-toggle="modal" data-target="#modalExtend">
-                                          Tambahan biaya +
-                                        </button>
-                                        <a href="<?php echo base_url().'admin/invoice?action=removeExtend&id='.$invoice['i_id']; ?>" type="button" class="btn btn-danger waves-effect waves-light">
-                                          Hapus
-                                      </a>
                                     </div>
                                 </div>
                             </div>

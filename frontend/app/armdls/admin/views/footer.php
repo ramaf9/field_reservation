@@ -10,11 +10,11 @@
               <div class="form-group">
                   <input type="hidden" name="id" value="<?php echo $invoice['i_id']; ?>">
                   <label for="usr">Item :</label>
-                  <input type="text" name="extend[item]" class="form-control" id="usr" required>
+                  <input type="text" name="extend[l_name]" class="form-control" id="usr" required>
                 </div>
                 <div class="form-group">
                   <label for="pwd">Price:</label>
-                  <input type="number" name="extend[price]" class="form-control" id="pwd" required>
+                  <input type="number" name="extend[l_price]" class="form-control" id="pwd" required>
                 </div>
 
 

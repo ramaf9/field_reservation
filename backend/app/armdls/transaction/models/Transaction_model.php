@@ -168,9 +168,10 @@ class Transaction_model extends CI_Model {
                                on transaction.t_field=field.f_name where t_field=".$data['f_location']);
   }
   public function get_price($date){
+      $time = gmdate("H:i:s", strtotime($date));
       $query = $this->db->query("select * from price where p_start_booking <= '".$date."' ORDER BY p_start_booking DESC LIMIT 1");
       $query = $query->result_array();
-      return $query;
+      return $query[0];
   }
 
 }
