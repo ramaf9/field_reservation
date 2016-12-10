@@ -51,9 +51,6 @@
 								</a>
 							</div>
 						</form>
-						<form action="<?php echo base_url(''); ?>admin/sendEmail">
-							<button class="btn btn-primary waves-effect waves-light" type="submit">Test</button
-						</form>
 					</div>
 					<div class="row">
 						<table class="table table-striped">
