@@ -24,6 +24,21 @@ class Admin extends CI_Controller {
 
 					// Run some setup
 					$this->rest->initialize($config);
+					if ($this->session->has_userdata('login')) {
+						$data= $this->session->userdata('login');
+						$role = $data['data']['role'];
+						if (isset($role) && $role=="adm") {
+
+						}
+						else if (isset($role) && $role=="s_adm"){
+							redirect(base_url().'superadmin/landing');
+						}
+						else{
+							echo json_encode($data);
+							// redirect(base_url().'home/landing');
+						}
+
+					}
 	}
 
 	public function index(){
@@ -37,9 +52,9 @@ class Admin extends CI_Controller {
 			$params['input'] = $this->input->post('user');
 			$result = $this->rest->post('user/login',$params);
 			$data['user'] = json_decode(json_encode($result), true);
-			$this->session->set_userdata('login',$data['user']);
 			// echo json_encode($data['user']);
 			if ($data['user']['status']==TRUE) {
+				$this->session->set_userdata('login',$data['user']);
 				redirect(base_url().'admin/landing');
 			}
 			else{

@@ -141,7 +141,7 @@ public function data_delete(){
 // Login with post method
 public function login_post(){
 	$input = $this->input->post('input');
-	
+
 	$data = array(
 		'u_email' => $input['u_email'],
 		'u_password' => $input['u_password']
@@ -160,9 +160,13 @@ public function login_post(){
 	// if return true
 	if ($data) {
 		// set message as true
+		$user['role'] = $data[0]['u_role'];
+		$user['email'] = $data[0]['u_email'];
+		$user['name'] = $data[0]['u_name'];
 		$message = [
 			'status' => TRUE,
-			'message' => 'Login success'
+			'message' => 'Login success',
+			'data' => $user
 		];
 	}
 	else{
