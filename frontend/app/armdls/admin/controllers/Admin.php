@@ -86,12 +86,14 @@ class Admin extends CI_Controller {
 				$date = $this->input->get('date');
 				$location = $this->input->get('location');
 				$name = $this->input->get('name');
+			$book = [];
+			if ($this->session->has_userdata('booked')) {
+				$book = $this->session->booked;
+				$data['book'] = $book;
+			}
 			if (!empty($id) && !empty($time) && !empty($location) && !empty($name)) {
-				$book = [];
-				if ($this->session->has_userdata('booked')) {
-					$book = $this->session->booked;
-					$data['book'] = $book;
-				}
+
+
 				$array = [
 					'id' => $id,
 					'date' => $date,
@@ -175,8 +177,8 @@ class Admin extends CI_Controller {
 				}
 				// echo json_encode($lease);
 
-				if ($this->session->has_userdata('invoice_'.$i_id.'') && $data['invoice']['i_status']=="paid") {
-					$data['extend'] = $this->session->userdata('invoice_'.$i_id.'');
+				if ($this->session->has_userdata('invoice_'.$i_id.'') && $data['invoice']['i_status'] != "booked") {
+									$data['extend'] = $this->session->userdata('invoice_'.$i_id.'');
 					// echo json_encode($data['extend']);
 					if (!empty($extend)) {
 						array_push($data['extend'],$extend);
@@ -193,6 +195,7 @@ class Admin extends CI_Controller {
 				}
 				else{
 					$this->session->set_userdata('invoice_'.$i_id.'',array());
+					$data['extend'] = $this->session->userdata('invoice_'.$i_id.'',array());
 				}
 
 				// $data['lease'] = json_decode(json_encode($lease), true);
@@ -207,17 +210,31 @@ class Admin extends CI_Controller {
 
 		}
 		if($this->input->server('REQUEST_METHOD')=='POST'){
-			$data = $this->input->post(NULL,TRUE);
+			$data_update = $this->input->post(NULL,TRUE);
 			if (!empty($id)) {
-				$invoice = $this->rest->put('transaction/invoice/'.$id,$data,'');
+
 
 				$invoice = $this->rest->get('transaction/invoice?filter[i_id]='.$id);
 				$transactions = $this->rest->get('transaction/data?input[t_invoice]='.$id);
-				$lease = $this->rest->get('lease/data');
+				// $lease = $this->rest->get('lease/data');
+
 				$data['transactions'] = json_decode(json_encode($transactions), true);
 				$data['invoice'] = json_decode(json_encode($invoice[0]), true);
 				$data['temp_payment'] = $data['invoice']['i_total_payment'];
 
+
+				$extend = $this->session->userdata('invoice_'.$id.'');
+
+				if ($data['invoice']['i_status'] == "paid" && isset($extend)) {
+					foreach ($extend as $key ) {
+						$key['l_invoice'] = $id;
+						$result = $this->rest->post('lease/data',array('input'=>$key));
+						echo json_encode($result);
+					}
+					$this->session->unset_userdata('invoice_'.$id);
+				}
+				$invoice = $this->rest->put('transaction/invoice/'.$id,$data_update,'');
+				$data['invoice']['i_status'] = $data_update['i_status'];
 				$config['protocol']    = 'smtp';
 				$config['smtp_host']    = 'ssl://smtp.gmail.com';
 				$config['smtp_port']    = '465';
@@ -231,127 +248,11 @@ class Admin extends CI_Controller {
 				$this->email->initialize($config);
 				$this->email->from('rysmawidjaja@gmail.com', 'Rysma Aditya W');
 				$this->email->to('rysmawidjaja@gmail.com');
-				// $this->email->message('
-				// <div class="row">
-        //     <div class="col-md-12">
-        //         <div class="panel panel-default">
-        //             <!-- <div class="panel-heading">
-        //                 <h4>Invoice</h4>
-        //             </div> -->
-        //             <div class="panel-body">
-        //                 <div class="clearfix">
-        //                     <div class="pull-left">
-        //                         <h4 class="text-right"><img src="assets/images/logo_dark.png" alt="velonic"></h4>
-				//
-        //                     </div>
-        //                     <div class="pull-right">
-        //                         <h4>Invoice # <br>
-        //                             <strong>'.$data['invoice']['i_id'].'</strong>
-        //                         </h4>
-        //                     </div>
-        //                 </div>
-        //                 <hr>
-        //                 <div class="row">
-        //                     <div class="col-md-12">
-        //                         <div class="pull-left m-t-30">
-        //                             <address>
-        //                               <strong>'.$data['invoice']['i_nama_pemesan'].'</strong><br>
-        //                               '.$data['invoice']['i_email_pemesan'].'<br>
-        //                               <abbr title="Phone">P:</abbr>'.$data['invoice']['i_email_pemesan'].'
-        //                               </address>
-        //                         </div>
-        //                         <div class="pull-right m-t-30">
-        //                             <p><strong>Order Date: </strong> Jun 15, 2015</p>
-        //                             <p class="m-t-10"><strong>Order Status: </strong> <span class="label label-pink">'.$data['invoice']['i_status'].'</span></p>
-        //                             <p class="m-t-10"><strong>Order ID: </strong> #123456</p>
-        //                         </div>
-        //                     </div>
-        //                 </div>
-        //                 <div class="m-h-50"></div>
-        //                 <div class="row">
-        //                     <div class="col-md-12">
-        //                         <div class="table-responsive">
-        //                             <table class="table m-t-30">
-        //                                 <thead>
-        //                                     <tr><th>#</th>
-        //                                     <th>Item</th>
-        //                                     <th>Description</th>
-        //                                     <th>Quantity</th>
-        //                                     <th>Unit Cost</th>
-        //                                     <th>Total</th>
-        //                                 </tr></thead>
-        //                                 <tbody>
-        //                                     <tr>
-        //                                         <td>1</td>
-        //                                         <td>LCD</td>
-        //                                         <td>Lorem ipsum dolor sit amet.</td>
-        //                                         <td>1</td>
-        //                                         <td>$380</td>
-        //                                         <td>$380</td>
-        //                                     </tr>
-        //                                     <tr>
-        //                                         <td>2</td>
-        //                                         <td>Mobile</td>
-        //                                         <td>Lorem ipsum dolor sit amet.</td>
-        //                                         <td>5</td>
-        //                                         <td>$50</td>
-        //                                         <td>$250</td>
-        //                                     </tr>
-        //                                     <tr>
-        //                                         <td>3</td>
-        //                                         <td>LED</td>
-        //                                         <td>Lorem ipsum dolor sit amet.</td>
-        //                                         <td>2</td>
-        //                                         <td>$500</td>
-        //                                         <td>$1000</td>
-        //                                     </tr>
-        //                                     <tr>
-        //                                         <td>4</td>
-        //                                         <td>LCD</td>
-        //                                         <td>Lorem ipsum dolor sit amet.</td>
-        //                                         <td>3</td>
-        //                                         <td>$300</td>
-        //                                         <td>$900</td>
-        //                                     </tr>
-        //                                     <tr>
-        //                                         <td>5</td>
-        //                                         <td>Mobile</td>
-        //                                         <td>Lorem ipsum dolor sit amet.</td>
-        //                                         <td>5</td>
-        //                                         <td>$80</td>
-        //                                         <td>$400</td>
-        //                                     </tr>
-        //                                 </tbody>
-        //                             </table>
-        //                         </div>
-        //                     </div>
-        //                 </div>
-        //                 <div class="row" style="border-radius: 0px;">
-        //                     <div class="col-md-3 col-md-offset-9">
-        //                         <p class="text-right"><b>Sub-total:</b> 2930.00</p>
-        //                         <p class="text-right">Discout: 12.9%</p>
-        //                         <p class="text-right">VAT: 12.9%</p>
-        //                         <hr>
-        //                         <h3 class="text-right">USD 2930.00</h3>
-        //                     </div>
-        //                 </div>
-        //                 <hr>
-        //                 <div class="hidden-print">
-        //                     <div class="pull-right">
-        //                         <a href="javascript:window.print()" class="btn btn-inverse waves-effect waves-light"><i class="fa fa-print"></i></a>
-        //                         <a href="#" class="btn btn-primary waves-effect waves-light">Submit</a>
-        //                     </div>
-        //                 </div>
-        //             </div>
-        //         </div>
-				//
-        //     </div>
-				//
-        // </div>
-				// ');
+
 				$this->email->message($this->load->view('invoice',$data,TRUE));
 				$this->email->subject('Test');
 				$this->email->send();
+
 
 				redirect(base_url().'admin/invoice?id='.$id);
 
@@ -370,8 +271,10 @@ class Admin extends CI_Controller {
 		$data['booked'] = $this->session->userdata('booked');
 		$data['total_biaya'] = 0;
 		for($i=0;$i < count($data['booked']);$i++) {
-			$price = $this->rest->get('transaction/price?date='.$data['booked'][$i]['date']);
+			$time = gmdate("H:i:s", strtotime($data['booked'][$i]['time']));
+			$price = $this->rest->get('transaction/price?date='.$time.'');
 			$price = json_decode(json_encode($price), true);
+			// echo json_encode($price);
 			$data['booked'][$i]['price'] = $price['p_price'];
 			$data['total_biaya'] = $data['total_biaya'] + $price['p_price'];
 			// array_push($key,['price'=> $price['p_price']]);
@@ -389,7 +292,8 @@ class Admin extends CI_Controller {
 			$booked = [];
 			$invoice['i_total_payment'] = 0;
 			for($i=0;$i < count($sess_booked);$i++) {
-				$price = $this->rest->get('transaction/price?date='.$sess_booked[$i]['date']);
+				$time = gmdate("H:i:s", strtotime($sess_booked[$i]['time']));
+				$price = $this->rest->get('transaction/price?date='.$time.'');
 				$price = json_decode(json_encode($price), true);
 				// $data['booked'][$i]['price'] = $price['p_price'];
 				$invoice['i_total_payment'] = $invoice['i_total_payment'] + $price['p_price'];

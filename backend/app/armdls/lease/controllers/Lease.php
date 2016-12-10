@@ -45,27 +45,37 @@ class Lease extends REST_Controller{
   public function data_post(){
   	$input = $this->input->post('input');
   	$create = $this->Lease_model->check_name($input);
-  	if ($create) {
-  		$data = array(
-  			'l_name' => $input['name'],
-  	// 		'l_qty' => $input['qty'],
-  			'l_price' => $input['price']
-  		);
-  		$this->Lease_model->insert($data);
-  		$message = [
-  			'status' => TRUE,
-  			'message' => $data['l_name'].' created'
-  		];
-  		$this->set_response($message, REST_Controller::HTTP_CREATED);
-  	}
-  	else
-  	{
-  		$message = [
-  			'status' => FALSE,
-  			'message' => $input['l_name'].' already exist'
-  		];
-  		$this->set_response($message, REST_Controller::HTTP_OK);
-  	}
+ //  	if ($create) {
+ //  		$data = array(
+ //  			'l_name' => $input['l_name'],
+ //  	// 		'l_qty' => $input['qty'],
+ //  			'l_price' => $input['l_price']
+ //  		);
+ //
+ //  	}
+     $result = $this->Lease_model->insert($input);
+     if ($result) {
+         $message = [
+             'status' => TRUE,
+             'message' => $data['l_name'].' created'
+         ];
+     }
+     else{
+         $message = [
+             'status' => FALSE,
+             'message' => 'fail created'
+         ];
+     }
+
+     $this->set_response($message, REST_Controller::HTTP_CREATED);
+ //  	else
+ //  	{
+ //  		$message = [
+ //  			'status' => FALSE,
+ //  			'message' => $input['l_name'].' already exist'
+ //  		];
+ //  		$this->set_response($message, REST_Controller::HTTP_OK);
+ //  	}
   }
 
   public function data_put(){

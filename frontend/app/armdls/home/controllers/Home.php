@@ -139,7 +139,7 @@ class Home extends CI_Controller {
 					];
 				}
 			}
-
+			
 			$this->load->view('header',$data);
 			$this->load->view('schedule');
 			$this->load->view('footer');
