@@ -34,13 +34,12 @@
 							<div class="col-lg-12">
 								<h4 class="m-t-0 header-title"><b>Tambah, Edit, Voucher</b></h4>
 								<!-- <form action="<?php echo base_url(''); ?>superadmin/showUser"> -->
-									<button class="btn btn-primary" type="submit"></button>
 								</form>
 								<p class="text-muted font-13">
 									Untuk menambahkan voucher
 								</p>
 								<!-- Full width modal -->
-	              <button class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#add-voucher">Responsive Modal</button>
+	              <button class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#add-voucher">Tambah Voucher</button>
 
 								<div class="p-20">
 									<div class="table-responsive">
@@ -48,22 +47,22 @@
 											<thead>
 												<tr>
 													<th>#</th>
-													<th>Table heading</th>
+													<th>Voucher Amount</th>
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<th scope="row">1</th>
-													<td>Table cell</td>
-												</tr>
-												<tr>
-													<th scope="row">2</th>
-													<td>Table cell</td>
-												</tr>
-												<tr>
-													<th scope="row">3</th>
-													<td>Table cell</td>
-												</tr>
+												<?php
+												if (!isset($voucher)||empty($voucher)) {
+													echo 'test';
+												} else {
+													foreach ($voucher as $key) {
+														echo '<tr>';
+														echo '<td>'.$key['v_id'].'</td>';
+														echo '<td>'.$key['v_amount'].'</td>';
+														echo '</tr>';
+													}
+												}
+												?>
 											</tbody>
 										</table>
 									</div>
@@ -135,20 +134,22 @@
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                   <h4 class="modal-title">Tambah Voucher</h4>
               </div>
+							<form method="post" action="<?php echo base_url(''); ?>superadmin/addVoucher">
               <div class="modal-body">
                   <div class="row">
-                      <div class="col-md-12">
+											<div class="col-md-12">
                           <div class="form-group">
                               <label for="field-1" class="control-label">Price</label>
-                              <input type="number" class="form-control" id="field-1" placeholder="Voucher Price">
+                              <input type="number" required="" name="input[v_amount]" class="form-control" id="field-1" placeholder="Voucher Price">
                           </div>
                       </div>
                   </div>
               </div>
               <div class="modal-footer">
                   <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-info waves-effect waves-light">Save changes</button>
+                  <button type="submit" class="btn btn-info waves-effect waves-light">Save changes</button>
               </div>
+							</form>
           </div>
       </div>
   </div><!-- /.modal -->

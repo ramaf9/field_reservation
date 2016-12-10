@@ -75,7 +75,12 @@ class Superadmin extends CI_Controller {
 	}
 
 	public function addVoucher(){
-
+		if($this->input->server('REQUEST_METHOD')=='POST'){
+			$params['input'] = $this->input->post('input');
+			$result = $this->rest->post('voucher/data',$params);
+			echo json_encode($result);
+			// redirect(base_url().'superadmin/landing');
+		}
 	}
 
 	public function logout(){
@@ -85,9 +90,11 @@ class Superadmin extends CI_Controller {
 	}
 
 	public function managerial(){
+		$user = $this->rest->get('voucher/data');
+		$data['voucher'] = json_decode(json_encode($user), TRUE);
 		$user = $this->rest->get('user/data');
 		$data['user'] = json_decode(json_encode($user), TRUE);
-		echo json_encode($user);
+		// echo json_encode($user);
 
 		$this->load->view('header');
 		$this->load->view('manage', $data);

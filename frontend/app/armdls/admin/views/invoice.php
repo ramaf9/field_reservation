@@ -84,7 +84,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <?php if (isset($extend) && $invoice['i_status'] != "booked"){ ?>
                             <div class="row">
                                 <div class="col-sm-6">

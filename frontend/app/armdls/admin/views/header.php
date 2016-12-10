@@ -206,13 +206,13 @@
 					<ul>
 						<li class="text-muted menu-title">Navigation</li>
 						<li class="has_sub">
-							<a href="<?php echo base_url(''); ?>admin/landing" class="waves-effect"><i class="ti-home"></i> <span> Dashboard </span></a>
+						  <a href="<?php echo base_url(''); ?>admin/landing" class="waves-effect"><i class="ti-home"></i> <span> Dashboard </span></a>
 						</li>
 						<li class="has_sub">
-							<a href="<?php echo base_url(''); ?>admin/checkout" class="waves-effect"><i class="ti-shopping-cart"></i><span class="label label-warning pull-right">6</span><span> Cart </span></a>
+						  <a href="<?php echo base_url(''); ?>admin/checkout" class="waves-effect"><i class="ti-shopping-cart"></i><span class="label label-warning pull-right">6</span><span> Cart </span></a>
 						</li>
 						<li class="has_sub">
-							<a href="<?php echo base_url(''); ?>admin/paymentlist" class="waves-effect"><i class="ti-menu-alt"></i><span> Reservation List   </span></a>
+						  <a href="<?php echo base_url(''); ?>admin/paymentlist" class="waves-effect"><i class="ti-menu-alt"></i><span> Reservation List   </span></a>
 						</li>
 					</ul>
 					<div class="clearfix"></div>

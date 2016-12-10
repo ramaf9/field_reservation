@@ -141,14 +141,6 @@ class Admin extends CI_Controller {
 		$this->load->view('footer');
 	}
 
-	public function updateSchedule(){
-
-	}
-
-	public function deleteSchedule(){
-
-	}
-
 	public function invoice($id=NULL)
 	{
 		if($this->input->server('REQUEST_METHOD')=='GET'){
@@ -186,12 +178,10 @@ class Admin extends CI_Controller {
 						// echo json_encode($data['extend']);
 						// redirect(base_url().'admin/invoice?id='.$i_id);
 					}
-
+					// echo json_encode($data['extend']);
 					foreach ($data['extend'] as $key ) {
 						$data['temp_payment'] = $data['temp_payment'] + $key['l_price'];
 					}
-
-
 				}
 				else{
 					$this->session->set_userdata('invoice_'.$i_id.'',array());
@@ -229,7 +219,7 @@ class Admin extends CI_Controller {
 					foreach ($extend as $key ) {
 						$key['l_invoice'] = $id;
 						$result = $this->rest->post('lease/data',array('input'=>$key));
-						echo json_encode($result);
+						// echo json_encode($result);
 					}
 					$this->session->unset_userdata('invoice_'.$id);
 				}
@@ -316,10 +306,8 @@ class Admin extends CI_Controller {
 		}
 	}
 
-
   function __encrip_password($password) {
         return md5($password);
     }
-
 
 }

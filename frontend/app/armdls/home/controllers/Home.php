@@ -139,7 +139,7 @@ class Home extends CI_Controller {
 					];
 				}
 			}
-			
+
 			$this->load->view('header',$data);
 			$this->load->view('schedule');
 			$this->load->view('footer');
@@ -270,7 +270,8 @@ class Home extends CI_Controller {
 			];
 			$result = $this->rest->post('transaction/payment', $params,'');
 			$this->session->sess_destroy('booked');
-			echo json_encode($params);
+			redirect(base_url().'home/checkout');
+			// echo json_encode($result);
 
 		}
 	}
