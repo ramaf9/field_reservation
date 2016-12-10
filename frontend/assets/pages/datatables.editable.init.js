@@ -2,7 +2,7 @@
 * Theme: Ubold Admin Template
 * Author: Coderthemes
 * Component: Editable
-* 
+*
 */
 
 (function( $ ) {
@@ -64,6 +64,7 @@
 					e.preventDefault();
 
 					_self.rowSave( $(this).closest( 'tr' ) );
+					
 				})
 				.on('click', 'a.cancel-row', function( e ) {
 					e.preventDefault();

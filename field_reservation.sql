@@ -1,8 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
+-- version 4.5.2
 -- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Dec 10, 2016 at 12:38 PM
 -- Server version: 10.1.13-MariaDB
--- PHP Version: 7.0.8
+-- PHP Version: 5.5.37
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -48,9 +51,6 @@ INSERT INTO `customer` (`c_email`, `c_name`, `c_password`, `c_tlp`, `c_status`, 
 --
 
 CREATE TABLE `field` (
-  `f_id` varchar(255) NOT NULL,
-  `f_name` varchar(255) NOT NULL,
-  `f_location` varchar(255) NOT NULL
   `f_id` int(255) NOT NULL,
   `f_name` varchar(255) NOT NULL,
   `f_location` enum('UNTAG','MANGGA_DUA','','') NOT NULL
@@ -71,13 +71,39 @@ INSERT INTO `field` (`f_id`, `f_name`, `f_location`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `invoice`
+--
+
+CREATE TABLE `invoice` (
+  `i_id` int(11) NOT NULL,
+  `i_status` varchar(255) NOT NULL,
+  `i_current_payment` int(11) NOT NULL,
+  `i_total_payment` int(11) DEFAULT NULL,
+  `i_voucher` varchar(255) NOT NULL,
+  `i_nama_pemesan` varchar(255) NOT NULL,
+  `i_email_pemesan` varchar(255) NOT NULL,
+  `i_telp_pemesan` varchar(255) NOT NULL,
+  `i_bank_rekening` varchar(255) NOT NULL,
+  `i_no_rekening` varchar(255) NOT NULL,
+  `i_date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `invoice`
+--
+
+INSERT INTO `invoice` (`i_id`, `i_status`, `i_current_payment`, `i_total_payment`, `i_voucher`, `i_nama_pemesan`, `i_email_pemesan`, `i_telp_pemesan`, `i_bank_rekening`, `i_no_rekening`, `i_date`) VALUES
+(13, 'booked', 12311, 50000, '', 'yeyrama@gmail.com', 'yeyrama@gmail.com', '213123', 'asdsa', 'rama', '2016-12-09');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `lease`
 --
 
 CREATE TABLE `lease` (
   `l_id` int(255) NOT NULL,
   `l_name` varchar(255) NOT NULL,
-  `l_qty` varchar(255) NOT NULL,
   `l_price` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -85,8 +111,8 @@ CREATE TABLE `lease` (
 -- Dumping data for table `lease`
 --
 
-INSERT INTO `lease` (`l_id`, `l_name`, `l_qty`, `l_price`) VALUES
-(1, 'bola', '4', 50000);
+INSERT INTO `lease` (`l_id`, `l_name`, `l_price`) VALUES
+(1, 'bola', 50000);
 
 -- --------------------------------------------------------
 
@@ -108,9 +134,6 @@ CREATE TABLE `news` (
 --
 
 CREATE TABLE `price` (
-<<<<<<< HEAD
-  `p_start_booking` datetime NOT NULL,
-  `p_end_booking` datetime NOT NULL,
   `p_start_booking` time NOT NULL,
   `p_end_booking` time NOT NULL,
   `p_price` int(11) NOT NULL,
@@ -138,13 +161,6 @@ CREATE TABLE `transaction` (
   `t_status` varchar(255) NOT NULL,
   `t_current_payment` varchar(255) NOT NULL,
   `t_date_payment` datetime NOT NULL,
-  `t_field` int(11) NOT NULL,
-  `t_price` int(11) NOT NULL,
-  `t_start_booking` datetime NOT NULL,
-  `t_end_booking` datetime NOT NULL,
-  `t_time_length` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
   `t_invoice` int(10) NOT NULL,
   `t_field` int(11) NOT NULL,
   `t_price` int(11) NOT NULL,
@@ -159,13 +175,7 @@ CREATE TABLE `transaction` (
 --
 
 INSERT INTO `transaction` (`t_id`, `t_type`, `t_voucher`, `t_status`, `t_current_payment`, `t_date_payment`, `t_invoice`, `t_field`, `t_price`, `t_date`, `t_start_booking`, `t_end_booking`, `t_time_length`) VALUES
-(1, 'Umum', '', 'Lunas', '50000', '0000-00-00 00:00:00', 0, 0, 0, '0000-00-00', '00:00:00', '00:00:00', 0),
-(2, 'Umum', '', 'Lunas', '50000', '0000-00-00 00:00:00', 0, 0, 0, '0000-00-00', '00:00:00', '00:00:00', 0),
-(4, 'Pelajar', '', 'Lunas', '30000', '0000-00-00 00:00:00', 0, 1, 50000, '2016-10-08', '07:00:00', '08:00:00', 1),
-(5, 'Pelajar', '', 'Belum bayar', '30000', '0000-00-00 00:00:00', 0, 1, 100000, '2016-10-08', '10:00:00', '12:00:00', 2),
-(7, 'Pelajar', '', 'Belum bayar', '30000', '0000-00-00 00:00:00', 0, 1, 90000, '2016-10-08', '18:00:00', '21:00:00', 3),
-(8, 'Pelajar', '', 'Belum bayar', '30000', '0000-00-00 00:00:00', 0, 4, 90000, '2016-10-08', '18:00:00', '21:00:00', 3),
-(9, 'Pelajar', '', 'Belum bayar', '30000', '0000-00-00 00:00:00', 0, 1, 100000, '2016-10-08', '10:00:00', '12:00:00', 2);
+(20, '', '', 'Belum bayar', '', '0000-00-00 00:00:00', 13, 1, 50000, '2016-12-10', '01:00:00', '02:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -175,7 +185,7 @@ INSERT INTO `transaction` (`t_id`, `t_type`, `t_voucher`, `t_status`, `t_current
 
 CREATE TABLE `users` (
   `u_email` varchar(255) NOT NULL,
-  `u_role` enum('adm','usr') NOT NULL,
+  `u_role` enum('adm','usr','sadm') NOT NULL,
   `u_name` varchar(255) NOT NULL,
   `u_password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -185,9 +195,22 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`u_email`, `u_role`, `u_name`, `u_password`) VALUES
-('rama', 'adm', 'rama', 'asd'),
-('rama2', 'adm', 'rama', 'asd'),
-('yeyrama@gmail.com', 'adm', 'rama', '123');
+('rama_adm', 'adm', 'rama', 'asd'),
+('rama_sadm', 'sadm', 'rama', 'asd'),
+('rama_usr', 'usr', 'rama', 'asd');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `voucher`
+--
+
+CREATE TABLE `voucher` (
+  `v_id` int(11) NOT NULL,
+  `v_date` date NOT NULL,
+  `v_amount` int(11) NOT NULL,
+  `v_status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables
@@ -204,6 +227,12 @@ ALTER TABLE `customer`
 --
 ALTER TABLE `field`
   ADD PRIMARY KEY (`f_id`);
+
+--
+-- Indexes for table `invoice`
+--
+ALTER TABLE `invoice`
+  ADD PRIMARY KEY (`i_id`);
 
 --
 -- Indexes for table `lease`
@@ -227,7 +256,9 @@ ALTER TABLE `price`
 -- Indexes for table `transaction`
 --
 ALTER TABLE `transaction`
-  ADD PRIMARY KEY (`t_id`);
+  ADD PRIMARY KEY (`t_id`),
+  ADD KEY `t_invoice` (`t_invoice`),
+  ADD KEY `t_date` (`t_date`);
 
 --
 -- Indexes for table `users`
@@ -236,18 +267,25 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`u_email`);
 
 --
+-- Indexes for table `voucher`
+--
+ALTER TABLE `voucher`
+  ADD PRIMARY KEY (`v_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `transaction`
---
-ALTER TABLE `transaction`
-  MODIFY `t_id` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `field`
 --
 ALTER TABLE `field`
   MODIFY `f_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `invoice`
+--
+ALTER TABLE `invoice`
+  MODIFY `i_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `lease`
 --
@@ -267,7 +305,12 @@ ALTER TABLE `price`
 -- AUTO_INCREMENT for table `transaction`
 --
 ALTER TABLE `transaction`
-  MODIFY `t_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `t_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+--
+-- AUTO_INCREMENT for table `voucher`
+--
+ALTER TABLE `voucher`
+  MODIFY `v_id` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

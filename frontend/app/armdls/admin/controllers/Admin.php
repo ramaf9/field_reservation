@@ -193,12 +193,43 @@ class Admin extends CI_Controller {
 	{
 		if($this->input->server('REQUEST_METHOD')=='GET'){
 			$i_id = $this->input->get('id');
+			$extend = $this->input->get('extend');
+			$action = $this->input->get('action');
+			if (!empty($action) && $action == "removeExtend") {
+				$this->session->unset_userdata('invoice_'.$i_id.'');
+
+			}
+
+
 			if (!empty($i_id)) {
 				$invoice = $this->rest->get('transaction/invoice?filter[i_id]='.$i_id);
 				$transactions = $this->rest->get('transaction/data?input[t_invoice]='.$i_id);
+				$lease = $this->rest->get('lease/data');
 				$data['transactions'] = json_decode(json_encode($transactions), true);
 				$data['invoice'] = json_decode(json_encode($invoice[0]), true);
-				// echo json_encode($transactions);
+				$data['temp_payment'] = $data['invoice']['i_total_payment'];
+
+
+				if ($this->session->has_userdata('invoice_'.$i_id.'') && $data['invoice']['i_status']=="paid") {
+					$data['extend'] = $this->session->userdata('invoice_'.$i_id.'');
+					if (!empty($extend)) {
+						array_push($data['extend'],$extend);
+						$this->session->set_userdata('invoice_'.$i_id.'',$data['extend']);
+						redirect(base_url().'admin/invoice?id='.$i_id);
+					}
+
+					foreach ($data['extend'] as $key ) {
+						$data['temp_payment'] = $data['temp_payment'] + $key['price'];
+					}
+
+
+				}
+				else{
+					$this->session->set_userdata('invoice_'.$i_id.'',array());
+				}
+
+				// $data['lease'] = json_decode(json_encode($lease), true);
+				// echo json_encode($this->session->userdata('invoice_'.$i_id));
 				$this->load->view('header',$data);
 				$this->load->view('invoice');
 				$this->load->view('footer');
@@ -225,6 +256,7 @@ class Admin extends CI_Controller {
 		}
 
 	}
+
 
 	public function checkout()
 	{

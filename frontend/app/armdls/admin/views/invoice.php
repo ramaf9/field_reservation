@@ -98,26 +98,44 @@
                                 </div>
                             </div>
 
+                            <?php if (isset($extend) && $invoice['i_status'] == "paid"){ ?>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="m-b-30">
-                                        <button id="addToTable" class="btn btn-default waves-effect waves-light">Tambahan Biaya <i class="fa fa-plus"></i></button>
+
+                                        <button type="button" class="btn btn-default waves-effect waves-light" data-toggle="modal" data-target="#modalExtend">
+                                          Tambahan biaya +
+                                        </button>
+                                        <a href="<?php echo base_url().'admin/invoice?action=removeExtend&id='.$invoice['i_id']; ?>" type="button" class="btn btn-danger waves-effect waves-light">
+                                          Hapus
+                                      </a>
                                     </div>
                                 </div>
                             </div>
-
                             <div class="">
-                                <table class="table table-responsive" id="datatable-editable">
+                                <table class="table table-responsive">
                                     <thead>
                                         <tr>
                                             <th>No</th>
                                             <th>Item</th>
-                                            <th>Qty</th>
-                                            <th>Price</th>
+                                            <th style='text-align:right;'>Price</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="gradeX">
+                                        <?php
+                                            $count = 1;
+                                            foreach ($extend as $key) {
+                                                echo '<tr class="gradeX">';
+                                                echo '<td>'.$count.'</td>';
+                                                echo '<td>'.$key['item'].'</td>';
+                                                echo '<td style="text-align:right;">IDR '.number_format( $key['price'] , 2 , ',' , '.' ).'</td>';
+                                                echo '</td>';
+                                                $count = $count +1;
+                                            }
+
+                                        } ?>
+
+                                        <!-- <tr class="gradeX">
                                             <td>1</td>
                                             <td>Bola</td>
                                             <td>Win 95+</td>
@@ -140,7 +158,7 @@
                                                 <a href="#" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
                                                 <a href="#" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
                                             </td>
-                                        </tr>
+                                        </tr> -->
                                     </tbody>
                                 </table>
                             </div>
@@ -151,7 +169,7 @@
                                     <p class="text-right">Discout: 12.9%</p> -->
                                     <!-- <p class="text-right">VAT: 12.9%</p> -->
                                     <hr>
-                                    <h3 class="text-right"><?php echo "IDR ".number_format( $invoice['i_total_payment'] , 2 , ',' , '.' ); ?></h3>
+                                    <h3 class="text-right"><?php echo "IDR ".number_format( $temp_payment , 2 , ',' , '.' ); ?></h3>
                                 </div>
                             </div>
                             <hr>
@@ -210,6 +228,36 @@
         © 2016. All rights reserved.
     </footer>
 
+</div>
+<!-- Modal -->
+<div class="modal fade" id="modalExtend" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Tambahan biaya</h4>
+      </div>
+      <div class="modal-body">
+          <form class="" action="<?php echo base_url().'admin/invoice'?>" method="get">
+              <div class="form-group">
+                  <input type="hidden" name="id" value="<?php echo $invoice['i_id']; ?>">
+                  <label for="usr">Item :</label>
+                  <input type="text" name="extend[item]" class="form-control" id="usr" required>
+                </div>
+                <div class="form-group">
+                  <label for="pwd">Price:</label>
+                  <input type="number" name="extend[price]" class="form-control" id="pwd" required>
+                </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+            </form>
+      </div>
+    </div>
+  </div>
 </div>
 <!-- ============================================================== -->
 <!-- End Right content here -->
