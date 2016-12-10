@@ -141,7 +141,7 @@ public function data_delete(){
 // Login with post method
 public function login_post(){
 	$input = $this->input->post('input');
-
+	
 	$data = array(
 		'u_email' => $input['u_email'],
 		'u_password' => $input['u_password']

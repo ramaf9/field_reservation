@@ -6,7 +6,7 @@
 		<meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
 		<meta name="author" content="Coderthemes">
 		<link rel="shortcut icon" href="assets/images/favicon_1.ico">
-		<title>Ubold - Responsive Admin Dashboard Template</title>
+		<title>GOOL - Futsal reservation</title>
 		<!--Morris Chart CSS -->
 		<link rel="stylesheet" href="<?php echo base_url(''); ?>assets/plugins/morris/morris.css">
 		<!--Form Wizard-->
@@ -189,7 +189,7 @@
 								<ul class="dropdown-menu">
 									<li><a href="javascript:void(0)"><i class="ti-user m-r-10 text-custom"></i> Profile</a></li>
 									<li class="divider"></li>
-									<li><a href="javascript:void(0)"><i class="ti-power-off m-r-10 text-danger"></i> Logout</a></li>
+									<li><a href="<?php echo base_url(''); ?>admin/logout"><i class="ti-power-off m-r-10 text-danger"></i> Logout</a></li>
 								</ul>
 							</li>
 						</ul>
@@ -210,7 +210,7 @@
 							<a href="<?php echo base_url(''); ?>admin/landing" class="waves-effect"><i class="ti-home"></i> <span> Dashboard </span></a>
 						</li>
 						<li class="has_sub">
-							<a href="<?php echo base_url(''); ?>" class="waves-effect"><i class="ti-shopping-cart"></i><span class="label label-warning pull-right">6</span><span> Cart </span></a>
+							<a href="<?php echo base_url(''); ?>admin/checkout" class="waves-effect"><i class="ti-shopping-cart"></i><span class="label label-warning pull-right">6</span><span> Cart </span></a>
 						</li>
 						<li class="has_sub">
 							<a href="<?php echo base_url(''); ?>admin/paymentlist" class="waves-effect"><i class="ti-menu-alt"></i><span> Reservation List   </span></a>

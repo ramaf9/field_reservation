@@ -38,6 +38,11 @@
 
 	});
 </script>
+<script type="text/javascript">
+$('.disabled').click(function(e){
+	e.preventDefault();
+})
+</script>
 <!--Form Wizard-->
 <script src="<?php echo base_url(''); ?>assets/plugins/jquery.steps/js/jquery.steps.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="<?php echo base_url(''); ?>assets/plugins/jquery-validation/js/jquery.validate.min.js"></script>
@@ -76,15 +81,19 @@
 <script src="<?php echo base_url(''); ?>assets/plugins/datatables/dataTables.colVis.js"></script>
 <script src="<?php echo base_url(''); ?>assets/plugins/datatables/dataTables.fixedColumns.min.js"></script>
 
-<script src="<?php echo base_url(''); ?>assets/pages/datatables.init.js"></script>
-
 <script src="<?php echo base_url(''); ?>assets/plugins/magnific-popup/js/jquery.magnific-popup.min.js"></script>
 <script src="<?php echo base_url(''); ?>assets/plugins/jquery-datatables-editable/jquery.dataTables.js"></script>
 <script src="<?php echo base_url(''); ?>assets/plugins/datatables/dataTables.bootstrap.js"></script>
 <script src="<?php echo base_url(''); ?>assets/plugins/tiny-editable/mindmup-editabletable.js"></script>
 <script src="<?php echo base_url(''); ?>assets/plugins/tiny-editable/numeric-input-example.js"></script>
 
+
 <script src="<?php echo base_url(''); ?>assets/pages/datatables.editable.init.js"></script>
+
+<script>
+	$('#mainTable').editableTableWidget().numericInputExample().find('td:first').focus();
+
+</script>
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -117,7 +126,6 @@
         });
     });
     TableManageButtons.init();
-
 </script>
 
 <script>

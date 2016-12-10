@@ -46,7 +46,7 @@
 									<button class="btn btn-primary waves-effect waves-light" type="submit">
 									Show
 									</button>
-									<a class="btn btn-primary waves-effect waves-light" href="<?php echo base_url(); ?>admin/checkout">
+									<a class="btn btn-primary waves-effect waves-light" href="<?php echo base_url(); ?>home/checkout">
 									Check out
 								</a>
 							</div>
@@ -91,7 +91,7 @@
 												}
 											}
 											if (!$booked) {
-												echo '<a href="'.base_url().'admin/landing?date='.$date.'&time='.$av['start_time'].'&id='.$key['f_id'].'&name='.$key['f_name'].'&location='.$key['f_location'].'"
+												echo '<a href="'.base_url().'home/landing?date='.$date.'&time='.$av['start_time'].'&id='.$key['f_id'].'&name='.$key['f_name'].'&location='.$key['f_location'].'"
 												data-target="#ava-field" class="btn btn-primary dropdown-toggle waves-effect waves-light">
 												'.$av['start_time'].'</a>';
 											}
@@ -112,7 +112,7 @@
 								?>
 							</tbody>
 						</table>
-						
+
 						<!-- <table class="table table-striped" id="datatable-editable">
 							<thead>
 								<tr>

@@ -9,9 +9,16 @@ class Transaction_model extends CI_Model {
   	else{
   		$id = "='".$data['t_id']."'";
   	}
+    if (!isset($data['t_invoice'])) {
+        $invoice = "";
+    }
+    else{
+        $invoice = "='".$data['t_invoice']."'";
+    }
 
     if(!isset($data['t_date'])){
   		$date = "" ;
+        // return false;
   	}
   	else{
   		$date = "='".$data['t_date']."'";
@@ -24,7 +31,8 @@ class Transaction_model extends CI_Model {
                                inner join field
                               on field.f_id = transaction.t_field
                               where t_id".$id.
-                              " AND t_date".$date."
+                              " AND t_date".$date.
+                              " AND t_invoice".$invoice."
                               GROUP BY transaction.t_id
                               ORDER BY price.p_start_booking ASC" );
   	return $query->result_array();
@@ -39,6 +47,21 @@ class Transaction_model extends CI_Model {
   	}
   	$query = $this->db->query("select * from field where f_id".$replace);
   	return $query->result_array();
+  }
+
+  public function read_invoice($data){
+  	if($data['i_id']===NULL){
+  		$replace = "" ;
+  	}
+  	else{
+  		$replace = "=".$data['i_id'];
+  	}
+  	$query = $this->db->query("select * from invoice where i_id".$replace);
+  	return $query->result_array();
+  }
+  public function update_invoice($data){
+      $this->db->where('i_id',$data['i_id']);
+      return $this->db->update('invoice',$data);
   }
 
   public function insert($data) {
@@ -96,35 +119,58 @@ class Transaction_model extends CI_Model {
   	}
   }
 
-  public function check_data_payment ($data) {
-  	$query = $this->db->query("select * from transaction where t_start_booking ='".$data['t_start_booking']."' AND t_date ='".$data['t_date']."'");
-  	if ($query->num_rows() == 0) {
-      return TRUE;
+  public function check_data_payment ($datas) {
+    $check = FALSE;
+    foreach ($datas as $data) {
+        $query = $this->db->query("select * from transaction where t_start_booking ='".$data['t_start_booking']."' AND t_date ='".$data['t_date']."'");
+      	if ($query->num_rows() == 0) {
+          $check = TRUE;
+        }
+      	else
+        {
+      	  $check = FALSE;
+      	}
     }
-  	else
-    {
-  		return FALSE;
-  	}
+    return $check;
+
   }
 
-  public function check_payment ($data) {
-  	$query = $this->db->query("select * from price where p_start_booking <= '".$data['t_start_booking']."' ORDER BY p_start_booking DESC LIMIT 1");
-    $query = $query->result_array();
-    $data['t_time_length'] = $data['t_end_booking'] - $data['t_start_booking'];
-    $data['t_price'] = $query[0]['p_price'] * intval($data['t_time_length']);
-    if (intval($data['t_current_payment'] <= $data['t_price']) && intval($data['t_current_payment'] >= 1/2* $query[0]['p_price']) ) {
+  public function check_payment ($datas,$invoice) {
+    $invoice['i_status'] = 'booked';
+    $invoice['i_date'] = date("Y-m-d");
+    $this->db->insert('invoice',$invoice);
+    $i_id = $this->db->insert_id();
+    $check = FALSE;
+    foreach ($datas as $data ) {
+        $query = $this->db->query("select * from price where p_start_booking <= '".$data['t_start_booking']."' ORDER BY p_start_booking DESC LIMIT 1");
+        $query = $query->result_array();
+        // $data['t_end_booking'] = gmdate("H:i:s", ($data['t_start_booking']+1)*3600);
+        $data['t_time_length'] = $data['t_end_booking'] - $data['t_start_booking'];
+        $data['t_price'] = $query[0]['p_price'] * intval($data['t_time_length']);
 
-      $data['t_status'] = "Belum bayar";
-      return $this->insert($data);
+        $data['t_invoice'] = $i_id;
+        $data['t_status'] = "Belum bayar";
+        $check = $this->insert($data);
+        // if (intval($data['t_current_payment'] <= $data['t_price']) && intval($data['t_current_payment'] >= 1/2* $query[0]['p_price']) ) {
+        if ($check ) {
+
+        }
+      	else
+        {
+      		$check = FALSE;
+      	}
     }
-  	else
-    {
-  		return FALSE;
-  	}
+    return $check;
+
   }
   public function check_available_schedule($data){
     $query = $this->db->query("select transaction.t_field, field.f_name from transaction inner join field
                                on transaction.t_field=field.f_name where t_field=".$data['f_location']);
+  }
+  public function get_price($date){
+      $query = $this->db->query("select * from price where p_start_booking <= '".$date."' ORDER BY p_start_booking DESC LIMIT 1");
+      $query = $query->result_array();
+      return $query;
   }
 
 }

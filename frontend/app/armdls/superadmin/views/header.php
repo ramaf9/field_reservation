@@ -212,6 +212,12 @@
 						<li class="has_sub">
 							<a href="<?php echo base_url(''); ?>home/checkout" class="waves-effect"><i class="ti-shopping-cart"></i><span class="label label-warning pull-right">6</span><span> Cart </span></a>
 						</li>
+						<li class="has_sub">
+							<a href="<?php echo base_url(''); ?>" class="waves-effect"><i class="ti-bar-chart"></i><span class="label label-pink pull-right">11</span><span> Charts </span></a>
+						</li>
+						<li class="has_sub">
+							<a href="<?php echo base_url(''); ?>" class="waves-effect"><i class="ti-gift"></i><span> Extras </span></a>
+						</li>
 					</ul>
 					<div class="clearfix"></div>
 				</div>

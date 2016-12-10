@@ -34,7 +34,7 @@
 						<p class="text-muted m-b-30 font-13">
 							Use the button classes on an element.
 						</p>
-						<form id="wizard-validation-form" method="post" action="<?php echo base_url() ?>admin/confirm_payment">
+						<form id="wizard-validation-form" method="post" action="<?php echo base_url() ?>home/confirm_payment">
 							<div>
 								<h3>Step 1</h3>
 								<section>
@@ -55,7 +55,7 @@
 													if (!isset($booked)||empty($booked)) {
 														echo '<tr>
 														<td>
-														Reserve field click <a href="'.base_url().'admin/landing">here</a>
+														Reserve field click <a href="'.base_url().'home/landing">here</a>
 														</td>
 														</tr>';
 													}
@@ -137,15 +137,15 @@
 											</p>
 											<div class="form-group">
 												<label for="exampleInputEmail1">Nama Pemesan</label>
-												<input required type="text" name="invoice[i_nama_pemesan]" class="form-control" id="exampleInputEmail1" placeholder="Nama pemesan">
+												<input type="text" name="invoice[i_nama_pemesan]" class="form-control" id="exampleInputEmail1" placeholder="Nama pemesan" required>
 											</div>
 											<div class="form-group">
 												<label for="exampleInputEmail1">Email address</label>
-												<input required type="email" name="invoice[i_email_pemesan]" class="form-control" id="exampleInputEmail1" placeholder="Email pemesan">
+												<input type="email" name="invoice[i_email_pemesan]" class="form-control" id="exampleInputEmail1" placeholder="Email pemesan" required>
 											</div>
 											<div class="form-group">
 												<label for="exampleInputEmail1">Nomor Telepon</label>
-												<input required type="number" name="invoice[i_telp_pemesan]" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+												<input type="number" name="invoice[i_telp_pemesan]" class="form-control" id="exampleInputEmail1" placeholder="Enter email" required>
 											</div>
 											<h4 class="m-t-0 header-title"><b>Pembayaran via Transfer</b></h4>
 											<p class="text-muted m-b-30 font-13">
@@ -165,15 +165,15 @@
 											</p>
 											<div class="form-group">
 												<label for="exampleInputEmail1">Nama Bank</label>
-												<input required type="text" name="invoice[i_bank_rekening]" class="form-control" id="exampleInputEmail1" placeholder="Nama bank">
+												<input type="text" name="invoice[i_bank_rekening]" class="form-control" id="exampleInputEmail1" placeholder="Nama bank" required>
 											</div>
 											<div class="form-group">
 												<label for="exampleInputEmail1">Nama Rekening</label>
-												<input required type="namarekening" name="invoice[i_no_rekening]" class="form-control" id="exampleInputEmail1" placeholder="Nama rekening">
+												<input type="namarekening" name="invoice[i_no_rekening]" class="form-control" id="exampleInputEmail1" placeholder="Nama rekening" required>
 											</div>
 											<div class="form-group">
 												<label for="exampleInputEmail1">Jumlah Bayar DP</label>
-												<input required type="number" name="invoice[i_current_payment]" class="form-control" id="exampleInputEmail1" placeholder="Jumlah DP">
+												<input type="number" name="invoice[i_current_payment]" class="form-control" id="exampleInputEmail1" placeholder="Jumlah DP" required>
 											</div>
 											<div class="row" style="border-radius: 0px;">
 												<div class="col-md-12">

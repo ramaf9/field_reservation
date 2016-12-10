@@ -8,14 +8,11 @@ class Transaction extends REST_Controller {
     $this->load->model('Transaction_model');
   }
 
-  public function data_get($id_param = NULL){
-  	$id = $this->input->get('id');
-  	if($id === NULL){
-  		$id = $id_param;
-  	}
-  	if ($id === NULL)
+  public function data_get(){
+  	$data = $this->input->get('input');
+  	if (!empty($data))
   	{
-  		$data = $this->Transaction_model->read($id);
+  		$data = $this->Transaction_model->read($data);
   		if ($data)
   		{
   			$this->response($data, REST_Controller::HTTP_OK);
@@ -28,18 +25,12 @@ class Transaction extends REST_Controller {
   			], REST_Controller::HTTP_NOT_FOUND);
   		}
   	}
-  	$data = $this->Transaction_model->read($id);
-  	if ($data)
-  	{
-  		$this->set_response($data, REST_Controller::HTTP_OK);
-  	}
-  	else
-  	{
-  		$this->set_response([
-  			'status' => FALSE,
-  			'error' => 'Record could not be found'
-  		], REST_Controller::HTTP_NOT_FOUND);
-  	}
+    else{
+        $this->response([
+            'status' => FALSE,
+            'error' => 'No data'
+        ], REST_Controller::HTTP_OK);
+    }
   }
 
   public function data_put(){
@@ -85,12 +76,50 @@ class Transaction extends REST_Controller {
   		], REST_Controller::HTTP_NOT_FOUND);
   	}
   }
+  public function price_get(){
+      $date = $this->input->get('date');
+      $price = $this->Transaction_model->get_price($date);
+      $this->set_response($price[0], REST_Controller::HTTP_OK);
+  }
+
+  public function invoice_get(){
+      $filter = $this->input->get('filter');
+      $data = $this->Transaction_model->read_invoice($filter);
+      $this->set_response($data, REST_Controller::HTTP_OK);
+  }
+  public function invoice_put($id=NULL){
+      $data = $this->input->input_stream();
+      $data['i_id'] = $id;
+
+      $this->set_response($data, REST_Controller::HTTP_OK);
+      $result = $this->Transaction_model->update_invoice($data);
+      if ($result) {
+          $this->set_response([
+              'status' => TRUE,
+              'message' => 'Updated'
+          ], REST_Controller::HTTP_OK);
+      }
+      else{
+          $this->set_response([
+              'status' => FALSE,
+              'error' => 'Error'
+          ], REST_Controller::HTTP_OK);
+      }
+
+
+  }
 
   public function available_get() {
     $data = $this->input->get('input');
 
     $transactions  = $this->Transaction_model->read($data);
     $fields = $this->Transaction_model->read_field(NULL);
+    if (empty($data['t_date'])) {
+        $this->set_response(['status' => FALSE,
+        'error' => 'Please specified your date'
+    ], REST_Controller::HTTP_OK);
+    }
+    else{
 
     for ($i=0; $i < count($fields) ; $i++) {
       $fields[$i]['available_time'] = [];
@@ -125,8 +154,9 @@ class Transaction extends REST_Controller {
       }
 
 
+        }
+        $this->set_response($fields, REST_Controller::HTTP_CREATED);
     }
-    $this->set_response($fields, REST_Controller::HTTP_CREATED);
 
   }
 
@@ -155,19 +185,24 @@ class Transaction extends REST_Controller {
   }
 
   public function payment_post(){
-    $input = $this->input->post('input');
+    $transactions = $this->input->post('transaction');
+    $invoice = $this->input->post('invoice');
     $message = [];
+    $create = FALSE;
+    if (isset($transactions)) {
 
-    $create = $this->Transaction_model->check_data_payment($input);
+        // $this->set_response($transactions,REST_Controller::HTTP_CREATED);
+        $create = $this->Transaction_model->check_data_payment($transactions);
 
+    }
   	if ($create) {
-  		$message = [
-  			'status' => TRUE,
-  			'message' => 'Booking available'
-  		];
-  		$this->set_response($message, REST_Controller::HTTP_OK);
+  // 		$message = [
+  // 			'status' => TRUE,
+  // 			'message' => 'Booking available'
+  // 		];
+  // 		$this->set_response($message, REST_Controller::HTTP_OK);
 
-      $create = $this->Transaction_model->check_payment($input);
+      $create = $this->Transaction_model->check_payment($transactions,$invoice);
 
       if ($create) {
 
