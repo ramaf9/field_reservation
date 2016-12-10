@@ -23,7 +23,7 @@
 					<h4 class="page-title">Editable Tables</h4>
 					<ol class="breadcrumb">
 						<li>
-							<a href="#">Ubold</a>
+							<a href="#">Gool Futsal</a>
 						</li>
 						<li>
 							<a href="#">Tables</a>

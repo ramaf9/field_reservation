@@ -59,7 +59,7 @@
 			<!-- LOGO -->
 			<div class="topbar-left">
 				<div class="text-center">
-					<a href="index.html" class="logo"><i class="icon-magnet icon-c-logo"></i><span>Ub<i class="md md-album"></i>ld</span></a>
+					<a href="<?php echo base_url(''); ?>home/landing" class="logo"><i class="icon-magnet icon-c-logo"></i><span>G<i class="md md-album"></i><i class="md md-album"></i>l FUTSAL</span></a>
 					<!-- Image Logo here -->
 					<!--<a href="index.html" class="logo">-->
 					<!--<i class="icon-c-logo"> <img src="assets/images/logo_sm.png" height="42"/> </i>-->

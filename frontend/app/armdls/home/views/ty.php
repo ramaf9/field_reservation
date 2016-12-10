@@ -25,7 +25,7 @@
         <![endif]-->
 
         <script src="<?php echo base_url(''); ?>assets/js/modernizr.min.js"></script>
-<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
           (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
           m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
           })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
@@ -39,60 +39,41 @@
 
 		<div class="account-pages"></div>
 		<div class="clearfix"></div>
-		<div class="wrapper-page">
-			<div class=" card-box">
-				<div class="panel-heading">
-					<h3 class="text-center"> Sign Up to <strong class="text-custom">Gool Futsal</strong> </h3>
-				</div>
 
-				<div class="panel-body">
+		<!-- HOME -->
+		<section class="home bg-dark" id="home">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-12 text-center">
+						<div class="home-wrapper">
+							<h1 class="icon-main text-custom"><i class="md md-album"></i></h1>
+							<h1 class="home-text"><span>Terima Kasih Telah Memesan</span></h1>
+							<p class="m-t-30 text-muted cd-text">
+								Pembayaran anda akan segera kami proses secepatnya
+								<br/>
+								Apabila dalam waktu 5 jam belum dikonfirmasi via email, harap hubungi call center
+							</p>
 
-					<form class="form-horizontal m-t-20" method="post" action="<?php echo base_url(''); ?>home/register">
+							<!-- COUNTDOWN -->
+              <p>You will be redirected in <span id="counter">10</span> second(s).</p>
+                <script type="text/javascript">
+                function countdown() {
+                    var i = document.getElementById('counter');
+                    if (parseInt(i.innerHTML)<=0) {
+                        location.href = 'home/landing';
+                    }
+                    i.innerHTML = parseInt(i.innerHTML)-1;
+                }
+                setInterval(function(){ countdown(); },1000);
+                </script>
+							<!-- /COUNTDOWN -->
 
-						<div class="form-group ">
-							<div class="col-xs-12">
-								<input class="form-control" name="input[name]" type="text" required="" placeholder="Nama lengkap">
-							</div>
 						</div>
-
-            <div class="form-group ">
-							<div class="col-xs-12">
-								<input class="form-control" name="input[email]" type="email" required="" placeholder="Email">
-							</div>
-						</div>
-
-						<div class="form-group">
-							<div class="col-xs-12">
-								<input class="form-control" name="input[password]" type="password" required="" placeholder="Password">
-							</div>
-						</div>
-
-            <div class="form-group ">
-							<div class="col-xs-12">
-								<input class="form-control" name="input[telp]" type="number" required="" placeholder="Nomor Telepon">
-							</div>
-						</div>
-
-						<div class="form-group text-center m-t-40">
-							<div class="col-xs-12">
-								<button class="btn btn-pink btn-block text-uppercase waves-effect waves-light" type="submit">Register</button>
-							</div>
-						</div>
-
-				</form>
-
+					</div>
 				</div>
 			</div>
-
-			<div class="row">
-				<div class="col-sm-12 text-center">
-					<p>
-						Already have account?<a href="page-login.html" class="text-primary m-l-5"><b>Sign In</b></a>
-					</p>
-				</div>
-			</div>
-
-		</div>
+		</section>
+		<!-- END HOME -->
 
 		<script>
 			var resizefunc = [];
@@ -108,11 +89,39 @@
         <script src="<?php echo base_url(''); ?>assets/js/waves.js"></script>
         <script src="<?php echo base_url(''); ?>assets/js/wow.min.js"></script>
         <script src="<?php echo base_url(''); ?>assets/js/jquery.nicescroll.js"></script>
-        <script src="<?php echo base_url(''); ?>assets/js/jquery.scrollTo.min.js"></script>
+        <script src="<?php echo base_url(''); ?><?php echo base_url(''); ?>assets/js/jquery.scrollTo.min.js"></script>
 
 
         <script src="<?php echo base_url(''); ?>assets/js/jquery.core.js"></script>
         <script src="<?php echo base_url(''); ?>assets/js/jquery.app.js"></script>
+
+		<!-- Countdown -->
+		<script src="<?php echo base_url(''); ?>assets/plugins/countdown/dest/jquery.countdown.min.js"></script>
+		<script src="<?php echo base_url(''); ?>assets/plugins/simple-text-rotator/jquery.simple-text-rotator.min.js"></script>
+
+		<script type="text/javascript">
+			$(document).ready(function() {
+
+				// Countdown
+				// To change date, simply edit: var endDate = "September 16, 2016 18:16:00";
+				$(function() {
+					var endDate = "January 17, 2018 11:59:59";
+					$('.u-countdown .row').countdown({
+						date : endDate,
+						render : function(data) {
+							$(this.el).html('<div><div><span class="text-custom">' + (parseInt(this.leadingZeros(data.years, 2) * 365) + parseInt(this.leadingZeros(data.days, 2))) + '</span><span><b>Days</b></span></div><div><span class="text-primary">' + this.leadingZeros(data.hours, 2) + '</span><span><b>Hours</b></span></div></div><div class="lj-countdown-ms"><div><span class="text-pink">' + this.leadingZeros(data.min, 2) + '</span><span><b>Minutes</b></span></div><div><span class="text-info">' + this.leadingZeros(data.sec, 2) + '</span><span><b>Seconds</b></span></div></div>');
+						}
+					});
+				});
+
+				// Text rotate
+				$(".home-text .rotate").textrotator({
+					animation : "fade",
+					speed : 3000
+				});
+			});
+
+		</script>
 
 	</body>
 </html>

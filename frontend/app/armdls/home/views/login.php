@@ -6,9 +6,9 @@
 		<meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
 		<meta name="author" content="Coderthemes">
 
-		<link rel="shortcut icon" href="assets/images/favicon_1.ico">
+		<link rel="shortcut icon" href="<?php echo base_url('');?>assets/images/favicon_1.ico">
 
-		<title>Ubold - Responsive Admin Dashboard Template</title>
+		<title>GOOL - Futsal reservation</title>
 
 		<link href="<?php echo base_url('');?>assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url('');?>assets/css/core.css" rel="stylesheet" type="text/css" />
@@ -25,7 +25,7 @@
         <![endif]-->
 
         <script src="<?php echo base_url('');?>assets/js/modernizr.min.js"></script>
-<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+				<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
           (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
           m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
           })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
@@ -43,7 +43,7 @@
 		<div class="wrapper-page">
 			<div class="card-box">
 				<div class="panel-heading">
-					<h3 class="text-center"> Sign In to <strong class="text-custom">UBold</strong></h3>
+					<h3 class="text-center"> Sign In to <strong class="text-custom">Gool Futsal</strong></h3>
 				</div>
 
 				<div class="panel-body">
