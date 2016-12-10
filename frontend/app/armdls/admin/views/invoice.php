@@ -22,7 +22,7 @@
                         <div class="panel-body">
                             <div class="clearfix">
                                 <div class="pull-left">
-                                    <h4 class="text-right"><img src="<?php echo base_url(''); ?>assets/images/logo_dark.png" alt="velonic"></h4>
+                                    <a href="<?php echo base_url(''); ?>home/landing" class="logo" ><i class="icon-magnet icon-c-logo"></i><span>G<i class="md md-album"></i><i class="md md-album"></i>l FUTSAL</span></a>
 
                                 </div>
                                 <div class="pull-right">
