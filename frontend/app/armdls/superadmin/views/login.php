@@ -48,7 +48,7 @@
 				</div>
 
 				<div class="panel-body">
-					<form class="form-horizontal m-t-20" method="post" action="<?php echo base_url(''); ?>home/index">
+					<form class="form-horizontal m-t-20" method="post" action="<?php echo base_url(''); ?>superadmin/landing">
 
 						<div class="form-group ">
 							<div class="col-xs-12">

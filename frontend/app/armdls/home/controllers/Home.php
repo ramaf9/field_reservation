@@ -8,8 +8,8 @@ class Home extends CI_Controller {
 		parent::__construct();
 
 		$this->load->library('session');
-    	$this->load->model('home_models');
-			$this->load->helper('cookie');
+    $this->load->model('home_models');
+		$this->load->helper('cookie');
 
 
 					$config = array('server'            => REST_URL,

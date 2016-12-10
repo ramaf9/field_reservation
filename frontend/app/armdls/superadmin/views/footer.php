@@ -87,6 +87,8 @@ $('.disabled').click(function(e){
 <script src="<?php echo base_url(''); ?>assets/plugins/tiny-editable/mindmup-editabletable.js"></script>
 <script src="<?php echo base_url(''); ?>assets/plugins/tiny-editable/numeric-input-example.js"></script>
 
+<script src="<?php echo base_url(''); ?>assets/pages/jquery.dashboard_3.js"></script>
+<script src="<?php echo base_url(''); ?>assets/plugins/jquery-sparkline/jquery.sparkline.min.js"></script>
 
 <script src="<?php echo base_url(''); ?>assets/pages/datatables.editable.init.js"></script>
 

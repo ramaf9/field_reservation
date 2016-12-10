@@ -189,7 +189,7 @@
 								<ul class="dropdown-menu">
 									<li><a href="javascript:void(0)"><i class="ti-user m-r-10 text-custom"></i> Profile</a></li>
 									<li class="divider"></li>
-									<li><a href="<?php echo base_url(''); ?>home/logout"><i class="ti-power-off m-r-10 text-danger"></i> Logout</a></li>
+									<li><a href="<?php echo base_url(''); ?>superadmin/logout"><i class="ti-power-off m-r-10 text-danger"></i> Logout</a></li>
 								</ul>
 							</li>
 						</ul>
@@ -207,16 +207,16 @@
 					<ul>
 						<li class="text-muted menu-title">Navigation</li>
 						<li class="has_sub">
-							<a href="<?php echo base_url(''); ?>home/landing" class="waves-effect"><i class="ti-home"></i> <span> Dashboard </span></a>
+							<a href="<?php echo base_url(''); ?>superadmin/landing" class="waves-effect"><i class="ti-home"></i> <span> Dashboard </span></a>
 						</li>
 						<li class="has_sub">
 							<a href="<?php echo base_url(''); ?>home/checkout" class="waves-effect"><i class="ti-shopping-cart"></i><span class="label label-warning pull-right">6</span><span> Cart </span></a>
 						</li>
 						<li class="has_sub">
-							<a href="<?php echo base_url(''); ?>" class="waves-effect"><i class="ti-bar-chart"></i><span class="label label-pink pull-right">11</span><span> Charts </span></a>
+							<a href="<?php echo base_url(''); ?>superadmin/historypayment" class="waves-effect"><i class="ti-bar-chart"></i><span class="label label-pink pull-right">11</span><span> Charts </span></a>
 						</li>
 						<li class="has_sub">
-							<a href="<?php echo base_url(''); ?>" class="waves-effect"><i class="ti-gift"></i><span> Extras </span></a>
+							<a href="<?php echo base_url(''); ?>superadmin/managerial" class="waves-effect"><i class="ti-gift"></i><span> Extras </span></a>
 						</li>
 					</ul>
 					<div class="clearfix"></div>

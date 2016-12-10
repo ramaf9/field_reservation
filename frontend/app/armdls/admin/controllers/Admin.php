@@ -27,9 +27,29 @@ class Admin extends CI_Controller {
 	}
 
 	public function index(){
-		$this->load->view('login');
+		if ($this->session->has_userdata('login')) {
+			redirect(base_url().'admin/landing');
+		}
+		if($this->input->server('REQUEST_METHOD')=='GET'){
+			$this->load->view('login');
+		}
+		else if($this->input->server('REQUEST_METHOD')=='POST'){
+			$params['input'] = $this->input->post('user');
+			$result = $this->rest->post('user/login',$params);
+			$data['user'] = json_decode(json_encode($result), true);
+			$this->session->set_userdata('login',$data['user']);
+			// echo json_encode($data['user']);
+			if ($data['user']['status']==TRUE) {
+				redirect(base_url().'admin/landing');
+			}
+			else{
+				redirect(base_url().'admin');
+			}
+		}
 	}
+
 	public function logout(){
+		$this->session->unset_userdata();
 		$this->session->sess_destroy();
 		redirect(base_url().'admin');
 	}
