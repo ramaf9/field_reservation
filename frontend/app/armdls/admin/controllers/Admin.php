@@ -147,6 +147,7 @@ class Admin extends CI_Controller {
 			$i_id = $this->input->get('id');
 			$extend = $this->input->get('extend');
 			$action = $this->input->get('action');
+			$voucher = $this->input->get('v_id');
 			if (!empty($action) && $action == "removeExtend") {
 				$this->session->unset_userdata('invoice_'.$i_id.'');
 
@@ -186,6 +187,20 @@ class Admin extends CI_Controller {
 				else{
 					$this->session->set_userdata('invoice_'.$i_id.'',array());
 					$data['extend'] = $this->session->userdata('invoice_'.$i_id.'',array());
+				}
+				if (!empty($voucher)) {
+					$extend_voucher = [
+						'v_id' => $voucher,
+					];
+					$result = $this->rest->put('voucher/use_voucher/'.$i_id,$extend_voucher);
+					$result = json_decode(json_encode($result), true);
+					// echo json_encode($result);
+					// if ($result['status']) {
+					// 	echo 'alert("'.$result['message'].'")';
+					// }
+					// else{
+					// 	echo 'alert("'.$result['error'].'")';
+					// }
 				}
 
 				// $data['lease'] = json_decode(json_encode($lease), true);

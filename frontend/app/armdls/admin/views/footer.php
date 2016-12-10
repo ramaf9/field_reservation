@@ -27,6 +27,30 @@
     </div>
   </div>
 </div>
+<div class="modal fade" id="modalVoucher" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Masukan voucher</h4>
+      </div>
+      <div class="modal-body">
+          <form class="" action="<?php echo base_url().'admin/invoice'?>" method="get">
+              <div class="form-group">
+                  <input type="hidden" name="id" value="<?php echo $invoice['i_id']; ?>">
+                  <label for="usr">Voucher :</label>
+                  <input type="text" name="v_id" class="form-control" id="usr" required>
+                </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+            </form>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- ============================================================== -->
 <!-- End Right content here -->
 <!-- ============================================================== -->

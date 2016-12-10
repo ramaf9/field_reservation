@@ -94,6 +94,9 @@
                                             <button type="button" class="btn btn-default waves-effect waves-light" data-toggle="modal" data-target="#modalExtend">
                                               Tambahan biaya +
                                             </button>
+                                            <button type="button" class="btn btn-default waves-effect waves-light" data-toggle="modal" data-target="#modalVoucher">
+                                              Masukan voucher
+                                            </button>
                                             <a href="<?php echo base_url().'admin/invoice?action=removeExtend&id='.$invoice['i_id']; ?>" type="button" class="btn btn-danger waves-effect waves-light">
                                               Hapus
                                           </a>

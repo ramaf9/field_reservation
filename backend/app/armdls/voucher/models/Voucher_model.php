@@ -36,5 +36,25 @@ class Voucher_model extends CI_Model{
   		return FALSE;
   	}
   }
+  public function update_voucher($i_id,$amount,$v_id){
+      $this->db->where('i_id',$i_id);
+      $this->db->set('i_total_payment','i_total_payment - '.$amount.'',FALSE);
+      $result = $this->db->update('invoice');
+      if ($this->db->affected_rows() > 0) {
+          $this->db->where('v_id',$v_id);
+          $this->db->set('v_status','1');
+          $result = $this->db->update('voucher');
+
+          if ($this->db->affected_rows() > 0 ) {
+              return TRUE;
+          }
+          else{
+              return FALSE;
+          }
+      }
+      else{
+          return FALSE;
+      }
+  }
 
 }

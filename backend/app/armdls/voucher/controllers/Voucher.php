@@ -116,4 +116,38 @@ class Voucher extends REST_Controller{
   		], REST_Controller::HTTP_NOT_FOUND);
   	}
   }
+  public function use_voucher_put($i_id){
+      $data = $this->input->input_stream();
+      if (isset($data['v_id'])) {
+          $check_v = $this->voucher_model->read($data['v_id']);
+
+          if ($check_v && isset($check_v[0]['v_amount']) && $check_v[0]['v_status'] == 0) {
+              $check_v = $this->voucher_model->update_voucher($i_id,$check_v[0]['v_amount'],$data['v_id']);
+              if ($check_v) {
+                  $this->set_response([
+            			'status' => TRUE,
+            			'message' => 'Success !'
+            		], REST_Controller::HTTP_OK);
+              }
+              else{
+                  $this->set_response([
+            			'status' => FALSE,
+            			'error' => 'Voucher invalid1'
+            		], REST_Controller::HTTP_OK);
+              }
+          }
+          else{
+              $this->set_response([
+        			'status' => FALSE,
+        			'error' => 'Voucher invalid2'
+        		], REST_Controller::HTTP_OK);
+          }
+      }
+      else{
+          $this->set_response([
+    			'status' => FALSE,
+    			'error' => 'Voucher invalid'
+    		], REST_Controller::HTTP_NOT_FOUND);
+      }
+  }
 }
