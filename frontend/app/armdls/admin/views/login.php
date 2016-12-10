@@ -8,7 +8,7 @@
 
 		<link rel="shortcut icon" href="assets/images/favicon_1.ico">
 
-		<title>Ubold - Responsive Admin Dashboard Template</title>
+		<title>GOOL - Futsal reservation</title>
 
 		<link href="<?php echo base_url('');?>assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url('');?>assets/css/core.css" rel="stylesheet" type="text/css" />
@@ -43,7 +43,7 @@
 		<div class="wrapper-page">
 			<div class="card-box">
 				<div class="panel-heading">
-					<h3 class="text-center"> Sign In to <strong class="text-custom">UBold</strong></h3>
+					<h3 class="text-center"> Sign In to <strong class="text-custom">Gool Futsal</strong></h3>
 				</div>
 
 				<div class="panel-body">
@@ -86,13 +86,6 @@
 						</div>
 					</form>
 
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-12 text-center">
-					<p>
-						Don't have an account? <a href="<?php echo base_url(''); ?>home/register" class="text-primary m-l-5"><b>Sign Up</b></a>
-					</p>
 				</div>
 			</div>
 

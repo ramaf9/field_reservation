@@ -34,7 +34,7 @@ class Admin extends CI_Controller {
 							redirect(base_url().'superadmin/landing');
 						}
 						else{
-							echo json_encode($data);
+							// echo json_encode($data);
 							// redirect(base_url().'home/landing');
 						}
 
@@ -238,7 +238,6 @@ class Admin extends CI_Controller {
 				$this->email->initialize($config);
 				$this->email->from('rysmawidjaja@gmail.com', 'Rysma Aditya W');
 				$this->email->to('rysmawidjaja@gmail.com');
-
 				$this->email->message($this->load->view('invoice',$data,TRUE));
 				$this->email->subject('Test');
 				$this->email->send();
@@ -267,7 +266,6 @@ class Admin extends CI_Controller {
 			// echo json_encode($price);
 			$data['booked'][$i]['price'] = $price['p_price'];
 			$data['total_biaya'] = $data['total_biaya'] + $price['p_price'];
-			// array_push($key,['price'=> $price['p_price']]);
 		}
 		// echo json_encode($data);
 		$this->load->view('header',$data);
@@ -285,7 +283,6 @@ class Admin extends CI_Controller {
 				$time = gmdate("H:i:s", strtotime($sess_booked[$i]['time']));
 				$price = $this->rest->get('transaction/price?date='.$time.'');
 				$price = json_decode(json_encode($price), true);
-				// $data['booked'][$i]['price'] = $price['p_price'];
 				$invoice['i_total_payment'] = $invoice['i_total_payment'] + $price['p_price'];
 				// array_push($key,['price'=> $price['p_price']]);
 				$booked[$i]['t_field'] = $sess_booked[$i]['id'];

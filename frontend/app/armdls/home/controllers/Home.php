@@ -146,47 +146,6 @@ class Home extends CI_Controller {
 		}
 	}
 
-	// public function index(){
-	// 	if ($this->session->userdata('logged_in')) {
-	// 		$role = $this->session->userdata('role');
-	// 		$this->redirectUser($role);
-	// 	}
-	//
-	// 	else if($this->input->server('REQUEST_METHOD')=='GET'){
-	// 		$this->load->view('login');
-	// 	}
-	//
-	// 	else if($this->input->server('REQUEST_METHOD')=='POST'){
-	// 		$this->rest->format('application/json');
-	// 		$params['input'] = $this->input->post(NULL,TRUE);
-	// 		$user = $this->rest->post('user/login', $params,'');
-	// 		$user = json_decode(json_encode($user), true);
-	//
-	// 		if ($user['status']) {
-	// 		$role = $user['data']['role'];
-	// 		$this->session->set_userdata($user['data']);
-	// 		$this->redirectUser($role);
-	// 		}
-	//
-	// 		else{
-	// 		$message = "User/password salah";
-	// 		echo "<script type='text/javascript'>alert('$message');</script>";
-	// 		$this->load->view('login');
-	// 		}
-	// 	}
-	// }
-
-	// public function viewSchedule(){
-	// 	if($this->input->server('REQUEST_METHOD')=='GET'){
-	// 		$this->load->view('schedule');
-	// 	}else if($this->input->server('REQUEST_METHOD')=='POST'){
-	// 		$this->rest->format('application/json');
-	// 		$params['input'] = $this->input->post(NULL,TRUE);
-	// 		$user = $this->rest->get('transaction/available', $params,'');
-	// 		$user = json_decode(json_encode($user), true);
-	// 	}
-	// }
-
 	public function viewSchedule(){
 		$this->load->view('header');
 		$this->load->view('schedule');
@@ -208,7 +167,7 @@ class Home extends CI_Controller {
 				$this->load->view('footer');
 			}
 			else{
-				redirect(base_url().'admin/paymentlist');
+				redirect(base_url().'home/ty');
 			}
 
 		}
@@ -230,6 +189,10 @@ class Home extends CI_Controller {
 
 	}
 
+	public function ty(){
+		$this->load->view('ty');
+	}
+
 	public function checkout()
 	{
 		$data['booked'] = $this->session->userdata('booked');
@@ -246,6 +209,7 @@ class Home extends CI_Controller {
 		$this->load->view('checkout');
 		$this->load->view('footer');
 	}
+
 	public function confirm_payment(){
 		if($this->input->server('REQUEST_METHOD')=='POST'){
 			$invoice = $this->input->post('invoice');
@@ -262,7 +226,6 @@ class Home extends CI_Controller {
 				$booked[$i]['t_date'] = $sess_booked[$i]['date'];
 				$booked[$i]['t_start_booking'] = $sess_booked[$i]['time'];
 				$booked[$i]['t_end_booking'] = gmdate("H:i", ($sess_booked[$i]['time']+1)*3600);
-
 			}
 			$params = [
 				'invoice' => $invoice,
